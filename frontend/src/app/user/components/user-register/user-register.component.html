@@ -2,30 +2,62 @@
   <header class="bg-dark text-white p-2 mb-2 text-center">
     <h1>Register</h1>
   </header>
-  <form>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="row">
-        <mat-form-field appearance="outline">
-          <mat-label>First Name</mat-label>
-          <input matInput placeholder="Ex. Juan" formControlName="first_name" name="first_name">
-        </mat-form-field>
+      <mat-form-field appearance="outline" class="col-12">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="Ex. Juan" formControlName="first_Name">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-12">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Ex. Dela Cruz" formControlName="last_Name">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-12">
+        <mat-label>Middle Name</mat-label>
+        <input matInput placeholder="Ex. Reyes" formControlName="middle_Name">
+      </mat-form-field>
     </div>
     <div class="row">
-        <mat-form-field appearance="outline">
-          <mat-label>Last Name</mat-label>
-          <input matInput placeholder="Ex. Dela Cruz" formControlName="last_name" name="last_name">
-        </mat-form-field>
+      <mat-radio-group aria-label="Select an option" name="gender" formControlName="Gender">
+        <mat-label><b>Gender</b></mat-label>
+        <mat-radio-button value="male">Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
+      </mat-radio-group>
     </div>
     <div class="row">
-        <mat-form-field appearance="outline">
-          <mat-label>Middle Name</mat-label>
-          <input matInput placeholder="Ex. Reyes" formControlName="middle_name" name="middle_name">
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Date of birth</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="Birthdate" name="birthday">
+        <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" placeholder="Ex. test@gmail.com" formControlName="Email" name="email">
+      </mat-form-field>
     </div>
     <div class="row">
 
     </div>
-    <div id="divChart">
-      <canvas id="myChart"></canvas>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" name="password" formControlName="Password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" name="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <button type="submit" class="btn btn-dark">Register</button>
     </div>
   </form>
 </div>

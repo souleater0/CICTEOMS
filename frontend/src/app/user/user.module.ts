@@ -1,11 +1,3 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { UserRoutingModule } from './user-routing.module';
-import { UserLoginComponent } from './components/user-login/user-login.component';
-import { UserRegisterComponent } from './components/user-register/user-register.component';
-import { UserHomeComponent } from './components/user-home/user-home.component';
-import { RouterModule, Routes } from '@angular/router';
-
 //AngularMaterial
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,15 +17,24 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UserRoutingModule } from './user-routing.module';
+import { UserLoginComponent } from './components/user-login/user-login.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { UserHomeComponent } from './components/user-home/user-home.component';
+import { RouterModule, Routes } from '@angular/router';
+
 const routes:Routes = [
   {
-    path: '', component: UserHomeComponent
+    path: 'user/login', component: UserLoginComponent
+
   },
   {
-    path: 'register', component: UserRegisterComponent
+    path: 'user/register', component: UserRegisterComponent
   },
   {
-    path: 'login', component: UserLoginComponent
+    path: 'user/home', component: UserHomeComponent
   }
 ];
 
