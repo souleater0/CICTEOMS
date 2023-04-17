@@ -26,8 +26,13 @@ import { UserHomeComponent } from './components/user-home/user-home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UserForgotpassComponent } from './components/user-forgotpass/user-forgotpass.component';
 import { UserForgototpComponent } from './components/user-forgototp/user-forgototp.component';
+import { UserHeaderComponent } from './components/user-header/user-header.component';
+import { UserSidenavComponent } from './components/user-sidenav/user-sidenav.component';
 
 const routes:Routes = [
+  {
+    path: '', component: UserLoginComponent
+  },
   {
     path: 'user/login', component: UserLoginComponent
 
@@ -52,7 +57,9 @@ const routes:Routes = [
     UserRegisterComponent,
     UserHomeComponent,
     UserForgotpassComponent,
-    UserForgototpComponent
+    UserForgototpComponent,
+    UserHeaderComponent,
+    UserSidenavComponent
   ],
 
   imports: [

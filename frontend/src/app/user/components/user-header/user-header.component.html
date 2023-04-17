@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark px-2">
+
+  <div class="side-nav-button p-2 me-3 text-light" (click)="SideNavToggle()">
+      <i class="fa-solid fa-bars"></i>
+  </div>
+
+  <a class="navbar-brand px-4" href="#"><div class="logo"><img src="assets/img/CICT.png" class="logo"> CICT Extension Office Management System</div></a>
+
+  <div class="profile-logo dropdown">
+      <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+          <img src="assets\img\elisha.png" alt="profile" class="photo">
+      Elisha
+      </button>
+      <ul class="dropdown-menu dropdown-menu dark">
+          <li><a routerLink="profile" class="dropdown-item">Profile</a></li>
+          <li><a href="#" class="dropdown-item" routerLink="/user/login">Log Out</a></li>
+          </ul>
+
+  </div>
+</nav>
