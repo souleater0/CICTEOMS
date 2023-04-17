@@ -24,6 +24,8 @@ import { UserLoginComponent } from './components/user-login/user-login.component
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { RouterModule, Routes } from '@angular/router';
+import { UserForgotpassComponent } from './components/user-forgotpass/user-forgotpass.component';
+import { UserForgototpComponent } from './components/user-forgototp/user-forgototp.component';
 
 const routes:Routes = [
   {
@@ -34,6 +36,12 @@ const routes:Routes = [
     path: 'user/register', component: UserRegisterComponent
   },
   {
+    path: 'user/forgot-otp', component: UserForgototpComponent
+  },
+  {
+    path: 'user/forgot-password', component: UserForgotpassComponent
+  },
+  {
     path: 'user/home', component: UserHomeComponent
   }
 ];
@@ -42,7 +50,9 @@ const routes:Routes = [
   declarations: [
     UserLoginComponent,
     UserRegisterComponent,
-    UserHomeComponent
+    UserHomeComponent,
+    UserForgotpassComponent,
+    UserForgototpComponent
   ],
 
   imports: [
