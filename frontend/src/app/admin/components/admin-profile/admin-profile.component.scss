@@ -1,0 +1,53 @@
+main {
+  margin-top: 100px;
+  margin-left: 400px;
+
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 0.25rem;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #1d2228;
+  text-decoration: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  color: #f2bd52;
+  background-color: transparent;
+  border-color: #f2bd52 #dee2e6 #fff;
+}
+
+.nav-link:focus, .nav-link:hover {
+  color: #f2bd52;
+}
+
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
+  height: 80%;
+  width: 80%;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: .875rem;
+  border-radius: 0.2rem;
+}
+.btn-primary {
+  margin: 10px;
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}

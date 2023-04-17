@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+// import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-login',
@@ -6,5 +8,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-login.component.scss']
 })
 export class AdminLoginComponent {
+  loginForm! : FormGroup;
+  submitted : boolean = false;
+  hide = true;
 
+  constructor(
+    private fb: FormBuilder
+  ){}
+  ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      Email : ['', Validators.required],
+      Password : ['', Validators.required],
+    });
+  }
+
+  login(){
+
+  }
 }

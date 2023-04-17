@@ -2,18 +2,18 @@
   <header class="bg-dark text-white p-2 mb-2 text-center">
     <h1>User Login</h1>
   </header>
-  <form [formGroup]="loginForm">
+  <form [formGroup]="loginForm" (submit)="login()">
     <div class="row">
       <mat-form-field appearance="outline" class="col-12">
         <mat-label>Email Address</mat-label>
-        <input matInput placeholder="Ex. Juan" formControlName="email">
+        <input matInput placeholder="Ex. Juan" formControlName="Email">
         <!-- <mat-hint>Hint</mat-hint> -->
       </mat-form-field>
     </div>
     <div class="row">
       <mat-form-field appearance="outline" class="col-12">
         <mat-label>Password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="Password">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
@@ -21,7 +21,7 @@
     </div>
     <div class="float-end" routerLink="/user/forgot-otp">Forgot Password </div><br>
     <div class="row">
-      <button type="submit" class="btn btn-dark" routerLink="/user/home">Login</button>
+      <button type="submit" class="btn btn-dark">Login</button>
     </div>
   </form>
 </div>

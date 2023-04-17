@@ -28,26 +28,43 @@ import { UserForgotpassComponent } from './components/user-forgotpass/user-forgo
 import { UserForgototpComponent } from './components/user-forgototp/user-forgototp.component';
 import { UserHeaderComponent } from './components/user-header/user-header.component';
 import { UserSidenavComponent } from './components/user-sidenav/user-sidenav.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { LoginLayoutComponent } from './layouts/login-layout.component';
+import { HomeLayoutComponent } from './layouts/home-layout.component';
+import { ProfileLayoutComponent } from './layouts/profile-layout.component';
 
 const routes:Routes = [
   {
-    path: '', component: UserLoginComponent
+    path: '',
+    component: LoginLayoutComponent,
+    children: [{
+      path: '',
+      component: UserLoginComponent
+    }]
   },
   {
-    path: 'user/login', component: UserLoginComponent
-
+    path: '',
+    component: LoginLayoutComponent,
+    children: [{
+      path: 'user/login',
+      component: UserLoginComponent
+    }]
   },
   {
-    path: 'user/register', component: UserRegisterComponent
+    path: '',
+    component: HomeLayoutComponent,
+    children: [{
+      path: 'user/home',
+      component: UserHomeComponent,
+    }]
   },
   {
-    path: 'user/forgot-otp', component: UserForgototpComponent
-  },
-  {
-    path: 'user/forgot-password', component: UserForgotpassComponent
-  },
-  {
-    path: 'user/home', component: UserHomeComponent
+    path: '',
+    component: ProfileLayoutComponent,
+    children: [{
+      path: 'user/profile',
+      component: UserProfileComponent,
+    }]
   }
 ];
 
@@ -59,8 +76,12 @@ const routes:Routes = [
     UserForgotpassComponent,
     UserForgototpComponent,
     UserHeaderComponent,
-    UserSidenavComponent
-  ],
+    UserSidenavComponent,
+    UserProfileComponent,
+    LoginLayoutComponent,
+    HomeLayoutComponent,
+    ProfileLayoutComponent
+    ],
 
   imports: [
     CommonModule,

@@ -2,7 +2,6 @@
   <header class="bg-dark text-white p-2 mb-2 text-center">
     <h1>SEND OTP</h1>
   </header>
-  <form>
     <div class="row">
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
@@ -11,8 +10,6 @@
       </mat-form-field>
     </div>
     <div class="row">
-      <button type="submit" class="btn btn-dark" routerLink="/user/login">SEND</button>
+      <button type="submit" class="btn btn-dark" (click)="sendotp()">SEND</button>
     </div>
-
-  </form>
 </div>
