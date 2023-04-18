@@ -26,9 +26,14 @@ export class AdminSidenavComponent implements OnInit{
     },
     {
       number: '4',
+      name: 'Partners Management',
+      icon: 'fa-solid fa-user-group',
+    },
+    {
+      number: '5',
       name: 'Report Generation',
       icon: 'fa-solid fa-file-zipper',
-    }
+    },
   ]
 
   constructor() { }
