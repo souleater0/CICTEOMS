@@ -83,7 +83,7 @@ class FacultyController extends Controller
         // $faculty = Faculty::where('email',$request->email)->first();
 
         //set custom claims
-        $customClaims['token'] = JWTAuth::claims([
+        $customClaims['access_token'] = JWTAuth::claims([
             'faculty_id'=> $faculty->faculty_id,
             'email' => $faculty->email
         ])->fromUser($faculty);
@@ -103,7 +103,7 @@ class FacultyController extends Controller
         $token = JWTAuth::claims($customClaims)->fromUser($faculty);
 
         return response()->json([
-            'data' => $customClaims,
+            'data' => $customClaims['access_token'],
             'message' => 'User Login Successful',
             'success' => true
         ],200);

@@ -13,7 +13,7 @@ main {
 }
 
 app-admin-sidenav {
-  position: absolute;
+  position: fixed;
   left: 0rem;
   width: 60px;
   height: calc(100vh - 4rem);

@@ -2,7 +2,7 @@
   <div class="side-nav-button p-2 me-3 text-light" (click)="SideNavToggle()">
       <i class="fa-solid fa-bars"></i>
   </div>
-  <a class="navbar-brand px-4" href="#"><div class="logo"><img src="assets/img/CICT.png" class="logo"> CICT Extension Office Management System</div></a>
+  <a class="navbar-brand px-4" routerLink="/admin/home"><div class="logo"><img src="assets/img/CICT.png" class="logo"> CICT Extension Office Management System</div></a>
 
   <div class="profile-logo dropdown">
       <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
@@ -10,7 +10,7 @@
       Elisha
       </button>
       <ul class="dropdown-menu dropdown-menu dark">
-          <li><a routerLink="/admin/profile" class="dropdown-item" >Profile</a></li>
+          <li><a routerLink="/admin/profile" class="dropdown-item" routerLink="/admin/profile">Profile</a></li>
           <li><a routerLink="/admin/login" class="dropdown-item">Log Out</a></li>
           </ul>
   </div>

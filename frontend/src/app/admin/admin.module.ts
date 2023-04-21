@@ -28,23 +28,89 @@ import { AdminHomeComponent } from './components/admin-home/admin-home.component
 import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
 import { AdminSidenavComponent } from './components/admin-sidenav/admin-sidenav.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
+import { HomeLayoutComponent } from './layouts/home-layout.component';
+import { LoginLayoutComponent } from './layouts/login-layout.component';
+import { AdminEpmComponent } from './components/admin-epm/admin-epm.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AdminPartnersmanagementComponent } from './components/admin-partnersmanagement/admin-partnersmanagement.component';
+import { AdminReportgenerationComponent } from './components/admin-reportgeneration/admin-reportgeneration.component';
+import { AdminAccountmanagementComponent } from './components/admin-accountmanagement/admin-accountmanagement.component';
+
 const routes:Routes = [
   {
-    path: 'admin/home', component: AdminLoginComponent
+    path: 'admin',
+    component: LoginLayoutComponent,
+    children: [{
+      path: '',
+      component: AdminLoginComponent
+    }]
   },
   {
-    path: 'admin/login', component: AdminLoginComponent
+    path: '',
+    component: LoginLayoutComponent,
+    children: [{
+      path: 'admin/login',
+      component: AdminLoginComponent
+    }]
   },
   {
-    path: 'admin', component: AdminHomeComponent
+    path: '',
+    component: HomeLayoutComponent,
+    children: [{
+      path: 'admin/home',
+      component: AdminHomeComponent
+    }]
   },
   {
-    path: 'admin/profile', component: AdminProfileComponent
+    path: '',
+    component: HomeLayoutComponent,
+    children: [{
+      path: 'admin/profile',
+      component: AdminProfileComponent
+    }]
   },
   {
-    path: 'admin/reset', component: AdminResetpasswordComponent
+    path: '',
+    component: HomeLayoutComponent,
+    children: [{
+      path: 'admin/dashboard',
+      component: AdminDashboardComponent
+    }]
+  },
+  {
+    path: '',
+    component: HomeLayoutComponent,
+    children: [{
+      path: 'admin/account-management',
+      component: AdminAccountmanagementComponent
+    }]
+  },
+  {
+    path: '',
+    component: HomeLayoutComponent,
+    children: [{
+      path: 'admin/extension-program-management',
+      component: AdminEpmComponent
+    }]
+  },
+  {
+    path: '',
+    component: HomeLayoutComponent,
+    children: [{
+      path: 'admin/partners-management',
+      component: AdminPartnersmanagementComponent
+    }]
+  },
+  {
+    path: '',
+    component: HomeLayoutComponent,
+    children: [{
+      path: 'admin/report-generation',
+      component: AdminReportgenerationComponent
+    }]
   }
 ];
+
 @NgModule({
   declarations: [
     AdminLoginComponent,
@@ -52,7 +118,13 @@ const routes:Routes = [
     AdminHomeComponent,
     AdminHeaderComponent,
     AdminSidenavComponent,
-    AdminProfileComponent
+    AdminProfileComponent,
+    HomeLayoutComponent,
+    LoginLayoutComponent,
+    AdminEpmComponent,
+    AdminDashboardComponent,
+    AdminPartnersmanagementComponent,
+    AdminReportgenerationComponent
   ],
   imports: [
     BrowserModule,

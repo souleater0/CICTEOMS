@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../service/login.service';
+import { catchError } from 'rxjs';
 
 declare var toastr: any;
 
@@ -56,7 +57,17 @@ export class UserLoginComponent implements OnInit {
   }
 
   login(){
-    this.router.navigate(['/user/home']);
-    toastr.success("Login Succesful!", "Information");
+    if(this.loginForm.valid){
+    this.http.post('http://localhost:8000/api/user/login', this.loginForm.value)
+    .subscribe((response: any) => {
+      localStorage.setItem('access_token', response.data);
+      this.router.navigate(['/user/home']);
+      toastr.success("Login Succesful!", "Information");
+    }, error => {
+      console.log(error);
+    });
+    }
+
+
   }
 }
