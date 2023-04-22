@@ -39,6 +39,22 @@ import {InterceptorService} from './service/interceptor.service';
 
 const routes:Routes = [
   {
+    path: '',
+    component: UserLoginComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'user/login',
+      },
+      {
+        path: 'user/login',
+        component: UserLoginComponent,
+        // canActivate: [AuthGuard],
+      },
+    ]
+  },
+  {
     path: 'user',
     component: HomeLayoutComponent,
     children: [
@@ -58,22 +74,7 @@ const routes:Routes = [
         canActivate: [AuthGuard],
       }
     ]
-  },
-  {
-    path: '',
-    component: LoginLayoutComponent,
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'user/login'
-      },
-      {
-        path: 'user/login',
-        component: UserLoginComponent,
-      }
-    ]
-  },
+  }
   // {
   //   path: '',
   //   component: LoginLayoutComponent,

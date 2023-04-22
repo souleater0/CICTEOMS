@@ -85,7 +85,8 @@ class FacultyController extends Controller
         //set custom claims
         $customClaims['access_token'] = JWTAuth::claims([
             'faculty_id'=> $faculty->faculty_id,
-            'email' => $faculty->email
+            'email' => $faculty->email,
+            'role' => 'user',
         ])->fromUser($faculty);
 
         //checkPassword
