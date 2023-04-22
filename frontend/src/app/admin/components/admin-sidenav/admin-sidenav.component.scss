@@ -22,6 +22,10 @@
   align-items: center;
   height: 50px;
 }
+.nav-list-item.active{
+  background-color:  #f2bd52;
+  border-radius: 10px;
+}
 .nav-list-item:hover{
   background-color:  #f2bd52;
   border-radius: 10px;

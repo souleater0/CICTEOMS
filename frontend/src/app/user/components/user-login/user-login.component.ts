@@ -34,8 +34,8 @@ export class UserLoginComponent implements OnInit {
   }
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      Email : ['', Validators.required],
-      Password : ['', Validators.required],
+      email : ['', Validators.required],
+      password : ['', Validators.required],
     });
     toastr.options = {
       "closeButton": true,
@@ -57,17 +57,19 @@ export class UserLoginComponent implements OnInit {
   }
 
   login(){
-    if(this.loginForm.valid){
     this.http.post('http://localhost:8000/api/user/login', this.loginForm.value)
     .subscribe((response: any) => {
-      localStorage.setItem('access_token', response.data);
-      this.router.navigate(['/user/home']);
-      toastr.success("Login Succesful!", "Information");
+
+      // console.log(response);
+      if(response.success==true){
+        localStorage.setItem('access_token', response.data.access_token);
+        this.router.navigate(['/user/home']);
+        toastr.success("Login Succesful!", "Information");
+      }
     }, error => {
+      toastr.error(error.error.message);
       console.log(error);
     });
-    }
-
 
   }
 }

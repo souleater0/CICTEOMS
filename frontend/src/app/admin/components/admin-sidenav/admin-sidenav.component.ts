@@ -41,7 +41,8 @@ export class AdminSidenavComponent implements OnInit{
     },
   ]
 
-  constructor() { }
+  constructor(
+  ) { }
 
   ngOnInit(): void {}
 }

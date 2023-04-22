@@ -13,17 +13,14 @@ export class UserSidenavComponent {
       number: '1',
       name: 'View Assigned Program',
       icon: 'fa-solid fa-sitemap',
+      link: 'user/view-assigned-program',
     },
     {
       number: '2',
-      name: 'Settings',
-      icon: 'fa-solid fa-gear',
-    },
-    {
-      number: '3',
-      name: 'About',
-      icon: 'fa-solid fa-circle-info',
-    },
+      name: 'Report Generation',
+      icon: 'fa-solid fa-file-text',
+      link: 'user/report-generation',
+    }
 
   ]
 

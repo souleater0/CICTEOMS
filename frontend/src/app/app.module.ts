@@ -22,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
   ],
   providers:[
+
   ],
   bootstrap: [AppComponent]
 })

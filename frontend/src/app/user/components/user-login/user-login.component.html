@@ -6,14 +6,14 @@
     <div class="row">
       <mat-form-field appearance="outline" class="col-12">
         <mat-label>Email Address</mat-label>
-        <input matInput placeholder="Ex. Juan" formControlName="Email">
+        <input matInput placeholder="Ex. Juan" formControlName="email">
         <!-- <mat-hint>Hint</mat-hint> -->
       </mat-form-field>
     </div>
     <div class="row">
       <mat-form-field appearance="outline" class="col-12">
         <mat-label>Password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="Password">
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>

@@ -1,9 +1,10 @@
 .border-white {
   border: 1px solid white;
 }
+
 .side-nav-content {
   color: #FEFEFD;
-  width: 250px;
+  width: 320px;
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 10px;
@@ -21,10 +22,15 @@
   align-items: center;
   height: 50px;
 }
+.nav-list-item.active{
+  background-color:  #f2bd52;
+  border-radius: 10px;
+}
 .nav-list-item:hover{
   background-color:  #f2bd52;
   border-radius: 10px;
 }
+
 .nav-list-open .nav-list-item:hover {
   background-color:  #f2bd52;
   border-radius: 10px;

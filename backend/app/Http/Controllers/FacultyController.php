@@ -45,18 +45,18 @@ class FacultyController extends Controller
         //Account Validate
         $credentials = $request->only('email','password');
 
-        // $validate = Validator::make($credentials,[
-        //     'email' => 'required|email',
-        //     'password' => 'required',
-        // ]);
+        $validate = Validator::make($credentials,[
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-        // if($validate->fails()){
-        //     return response()->json([
-        //         'message' => 'Email and Password Required!',
-        //         'success' => false,
-        //         'errors' => $validate->errors(),
-        //     ], 401);
-        // }
+        if($validate->fails()){
+            return response()->json([
+                'message' => 'Email and Password Required!',
+                'success' => false,
+                'errors' => $validate->errors(),
+            ], 401);
+        }
 
         // Check Email
         $faculty = Faculty::where('email',$request->email)->first();
@@ -65,20 +65,20 @@ class FacultyController extends Controller
             return response()->json([
                 'message' => 'Account is not yet Registered',
                 'success' => false,
-            ]);
+            ],401);
         }
 
-        // //Check Email Validity
-        // $emailValid = Faculty::where('email',$request->email)
-        // ->whereNotNull('email_verified_at')
-        // ->first();
+        //Check Email Validity
+        $emailValid = Faculty::where('email',$request->email)
+        ->whereNotNull('email_verified_at')
+        ->first();
 
-        // if(!$emailValid){
-        //     return response()->json([
-        //         'message' => 'Account is not yet Validated',
-        //         'success' => false,
-        //     ]);
-        // }
+        if(!$emailValid){
+            return response()->json([
+                'message' => 'Account is not yet Validated',
+                'success' => false,
+            ],401);
+        }
 
         // $faculty = Faculty::where('email',$request->email)->first();
 
@@ -94,7 +94,7 @@ class FacultyController extends Controller
             if(!Hash::check($request->password, $passwordChange->password)){
                 return response()->json([
                     'message' => 'Invalid Credentials',
-                    'success' => false,
+                    'success' => false
                 ],401);
             }
         }
@@ -103,7 +103,7 @@ class FacultyController extends Controller
         $token = JWTAuth::claims($customClaims)->fromUser($faculty);
 
         return response()->json([
-            'data' => $customClaims['access_token'],
+            'data' => $customClaims,
             'message' => 'User Login Successful',
             'success' => true
         ],200);
