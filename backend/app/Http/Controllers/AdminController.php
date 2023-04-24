@@ -46,12 +46,13 @@ class AdminController extends Controller
             return response()->json([
                 'message' => 'Account is not yet Registered',
                 'success' => false,
-            ]);
+            ],401);
         }
 
         //set custom claims
-        $customClaims['token'] = JWTAuth::claims([
-            'email' => $admin->email
+        $customClaims['access_token'] = JWTAuth::claims([
+            'email' => $admin->email,
+            'role' => 'admin',
         ])->fromUser($admin);
 
         //checkPassword

@@ -36,79 +36,69 @@ import { AdminPartnersmanagementComponent } from './components/admin-partnersman
 import { AdminReportgenerationComponent } from './components/admin-reportgeneration/admin-reportgeneration.component';
 import { AdminAccountmanagementComponent } from './components/admin-accountmanagement/admin-accountmanagement.component';
 
+//admin Auth Guard
+import { AuthGuard, AdminGuard } from '../guards/auth.guard';
+
 const routes:Routes = [
   {
     path: 'admin',
     component: LoginLayoutComponent,
-    children: [{
-      path: '',
-      component: AdminLoginComponent
-    }]
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'login',
+      },
+      {
+        path: 'login',
+        component: AdminLoginComponent,
+      },
+    ]
   },
   {
-    path: '',
-    component: LoginLayoutComponent,
-    children: [{
-      path: 'admin/login',
-      component: AdminLoginComponent
-    }]
-  },
-  {
-    path: '',
+    path: 'admin',
     component: HomeLayoutComponent,
-    children: [{
-      path: 'admin/home',
-      component: AdminHomeComponent
-    }]
-  },
-  {
-    path: '',
-    component: HomeLayoutComponent,
-    children: [{
-      path: 'admin/profile',
-      component: AdminProfileComponent
-    }]
-  },
-  {
-    path: '',
-    component: HomeLayoutComponent,
-    children: [{
-      path: 'admin/dashboard',
-      component: AdminDashboardComponent
-    }]
-  },
-  {
-    path: '',
-    component: HomeLayoutComponent,
-    children: [{
-      path: 'admin/account-management',
-      component: AdminAccountmanagementComponent
-    }]
-  },
-  {
-    path: '',
-    component: HomeLayoutComponent,
-    children: [{
-      path: 'admin/extension-program-management',
-      component: AdminEpmComponent
-    }]
-  },
-  {
-    path: '',
-    component: HomeLayoutComponent,
-    children: [{
-      path: 'admin/partners-management',
-      component: AdminPartnersmanagementComponent
-    }]
-  },
-  {
-    path: '',
-    component: HomeLayoutComponent,
-    children: [{
-      path: 'admin/report-generation',
-      component: AdminReportgenerationComponent
-    }]
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'dashboard'
+      },
+      {
+        path: 'dashboard',
+        component: AdminDashboardComponent,
+        canActivate: [AuthGuard, AdminGuard],
+      },
+      {
+        path: 'account-management',
+        component: AdminAccountmanagementComponent,
+        canActivate: [AuthGuard, AdminGuard],
+      },
+      {
+        path: 'extension-program-management',
+        component: AdminEpmComponent,
+        canActivate: [AuthGuard, AdminGuard],
+      },
+      {
+        path: 'partners-management',
+        component: AdminPartnersmanagementComponent,
+        canActivate: [AuthGuard, AdminGuard],
+      },
+      {
+        path: 'report-generation',
+        component: AdminReportgenerationComponent,
+        canActivate: [AuthGuard, AdminGuard],
+      },
+      {
+        path: 'profile',
+        component: AdminProfileComponent,
+        canActivate: [AuthGuard, AdminGuard],
+      },
+    ]
   }
+  // {
+  //   path: '**', redirectTo: ''
+  // }
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule} from '@angular/router';
-
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 declare var toastr: any;
 @Component({
@@ -10,11 +10,27 @@ declare var toastr: any;
 })
 
 export class UserForgototpComponent implements OnInit{
+  otpForm! : FormGroup;
+  submitted = false;
 
   constructor(
-    private router: RouterModule
+    private fb: FormBuilder,
+    private router: RouterModule,
   ){}
   ngOnInit(): void {
+    this.otpForm = this.fb.group(
+      {
+        code : ['',[
+          Validators.required,
+          Validators.pattern('^[0-9]*$'),
+        ],
+      ],
+
+    });
+    // Validators.required,
+    // Validators.minLength(6),
+    // Validators.maxLength(6),
+    // Validators.pattern('^[0-9]*$'),
     toastr.options = {
       "closeButton": true,
       "debug": false,
@@ -33,8 +49,18 @@ export class UserForgototpComponent implements OnInit{
       "hideMethod": "fadeOut"
     };
   }
-  sendotp(){
+
+  get f() {return this.otpForm.controls};
+
+  sendOtp(){
     // console.log("test");
-    toastr.success("Check your Email Verification Code.", "Email Sent!");
+    this.submitted = true;
+    if (this.otpForm.invalid) {
+      return;
+    }
+    if(this.otpForm.valid){
+      toastr.success("Check your Email Verification Code.", "Email Sent!");
+    }
+
   }
 }

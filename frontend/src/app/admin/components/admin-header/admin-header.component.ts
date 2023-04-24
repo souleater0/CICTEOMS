@@ -21,4 +21,7 @@ export class AdminHeaderComponent implements OnInit{
     this.sideNavToggled.emit(this.menuStatus);
   }
 
+  logout(){
+    localStorage.removeItem('access_token');
+  }
 }

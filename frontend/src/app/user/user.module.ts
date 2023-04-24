@@ -34,8 +34,13 @@ import { HomeLayoutComponent } from './layouts/home-layout.component';
 import { ProfileLayoutComponent } from './layouts/profile-layout.component';
 import { UserViewAssignedProgramComponent } from './components/user-view-assigned-program/user-view-assigned-program.component';
 import { UserReportGenerationComponent } from './components/user-report-generation/user-report-generation.component';
-import { AuthGuard } from './guards/auth.guard';
+
+//Guards
+import { AuthGuard, UserGuard, NoAuthGuard} from '../guards/auth.guard';
 import {InterceptorService} from './service/interceptor.service';
+
+//Key Events
+
 
 const routes:Routes = [
   {
@@ -50,7 +55,7 @@ const routes:Routes = [
       {
         path: 'user/login',
         component: UserLoginComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [NoAuthGuard],
       },
     ]
   },
@@ -61,72 +66,36 @@ const routes:Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'home'
+        redirectTo: 'home',
       },
       {
         path: 'home',
         component: UserHomeComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, UserGuard],
       },
       {
         path: 'profile',
         component: UserProfileComponent,
-        canActivate: [AuthGuard],
-      }
+        canActivate: [AuthGuard, UserGuard],
+      },
+      {
+        path: 'view-assigned-program',
+        component: UserViewAssignedProgramComponent,
+        canActivate: [AuthGuard, UserGuard],
+      },
+      {
+        path: 'report-generation',
+        component: UserReportGenerationComponent,
+        canActivate: [AuthGuard, UserGuard],
+      },
+
     ]
-  }
-  // {
-  //   path: '',
-  //   component: LoginLayoutComponent,
-  //   children: [{
-  //     path: 'user',
-  //     component: UserLoginComponent,
-  //   }]
-  // },
-  // {
-  //   path: '',
-  //   component: LoginLayoutComponent,
-  //   children: [{
-  //     path: 'user/login',
-  //     component: UserLoginComponent,
-  //   }]
-  // },
-  // {
-  //   path: '',
-  //   component: HomeLayoutComponent,
-  //   children: [{
-  //     path: 'user/home',
-  //     component: UserHomeComponent,
-  //     canActivate: [AuthGuard],
-  //   }]
-  // },
-  // {
-  //   path: '',
-  //   component: HomeLayoutComponent,
-  //   children: [{
-  //     path: 'user/view-assigned-program',
-  //     component: UserViewAssignedProgramComponent,
-  //     canActivate: [AuthGuard],
-  //   }]
-  // },
-  // {
-  //   path: '',
-  //   component: HomeLayoutComponent,
-  //   children: [{
-  //     path: 'user/report-generation',
-  //     component: UserReportGenerationComponent,
-  //     canActivate: [AuthGuard],
-  //   }]
-  // },
-  // {
-  //   path: '',
-  //   component: HomeLayoutComponent,
-  //   children: [{
-  //     path: 'user/profile',
-  //     component: UserProfileComponent,
-  //     canActivate: [AuthGuard],
-  //   }]
-  // },
+  },
+  {
+    path: 'user/forgot-otp',
+    component: UserForgototpComponent,
+    // canActivate: [AuthGuard, UserGuard],
+  },
   // {
   //   path: '**', redirectTo: ''
   // }
@@ -146,7 +115,7 @@ const routes:Routes = [
     HomeLayoutComponent,
     ProfileLayoutComponent,
     UserViewAssignedProgramComponent,
-    UserReportGenerationComponent
+    UserReportGenerationComponent,
     ],
 
   imports: [

@@ -1,5 +1,6 @@
 import {  Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user-header',
@@ -7,6 +8,8 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
   styleUrls: ['./user-header.component.scss']
 })
 export class UserHeaderComponent {
+  private apiUrl = environment.apiUrl;
+
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus: boolean = false;
   firstName ='';
@@ -23,7 +26,7 @@ export class UserHeaderComponent {
         'Content-Type': 'application/json'
       })
     };
-    this.http.get('http://localhost:8000/api/user',options)
+    this.http.get(`${this.apiUrl}/user`,options)
     .subscribe((response: any) => {
       this.firstName = response.data.first_name;
       console.log(response.data.first_name);
@@ -33,5 +36,8 @@ export class UserHeaderComponent {
   SideNavToggle(){
     this.menuStatus = !this.menuStatus;
     this.sideNavToggled.emit(this.menuStatus);
+  }
+  logout(){
+    localStorage.removeItem('access_token');
   }
 }

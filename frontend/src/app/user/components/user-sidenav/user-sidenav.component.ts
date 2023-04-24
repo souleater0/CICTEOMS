@@ -13,13 +13,13 @@ export class UserSidenavComponent {
       number: '1',
       name: 'View Assigned Program',
       icon: 'fa-solid fa-sitemap',
-      link: 'user/view-assigned-program',
+      link: 'view-assigned-program',
     },
     {
       number: '2',
       name: 'Report Generation',
       icon: 'fa-solid fa-file-text',
-      link: 'user/report-generation',
+      link: 'report-generation',
     }
 
   ]

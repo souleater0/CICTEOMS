@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\verificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +39,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('user/register',[FacultyController::class,'register']);
 Route::post('user/login',[FacultyController::class,'login']);
 
-// //User get
+//User Process
+Route::post('user/send-email-code',[verificationController::class,'sendVerificationCode']);
+
+
 // //Admin Route
-// Route::post('admin/register',[AdminController::class,'register']);
-// Route::post('admin/login',[AdminController::class,'login']);
+Route::post('admin/register',[AdminController::class,'register']);
+Route::post('admin/login',[AdminController::class,'login']);
 

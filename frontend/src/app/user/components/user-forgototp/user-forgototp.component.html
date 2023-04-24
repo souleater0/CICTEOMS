@@ -2,14 +2,25 @@
   <header class="bg-dark text-white p-2 mb-2 text-center">
     <h1>SEND OTP</h1>
   </header>
+  <form [formGroup]="otpForm" (submit)="sendOtp()">
     <div class="row">
       <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" placeholder="Ex. juandelacruz@gmail.com" name="email">
-        <!-- formControlName="Email" -->
+        <mat-label>Code</mat-label>
+        <input matInput type="text" placeholder="Ex. 123456" name="code"
+        formControlName="code"
+        [ngClass]="{ 'is-invalid': submitted && f['code'].errors}"
+        minlength="6" maxlength="6">
+        <mat-error *ngIf="submitted && f['code'].errors">
+          <span *ngIf="f['code'].errors['required']">Please Enter your Code.</span>
+          <span *ngIf="f['code'].errors['pattern']">Code compose of 6 numbers</span>
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
-      <button type="submit" class="btn btn-dark" (click)="sendotp()">SEND</button>
+      <div class="text-center">
+        <button type="submit" style="width: 100%;" class="btn btn-dark">SEND</button>
+      </div>
+
     </div>
+  </form>
 </div>

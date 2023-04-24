@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('birth_date');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('code')->nullable();
             $table->string('password');
             $table->string('facultyType');
             $table->rememberToken();

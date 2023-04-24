@@ -9,7 +9,6 @@ import  {UserModule} from './user/user.module'; //Import User Module
 import {AdminModule} from './admin/admin.module'; //Import Admin Module
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 @NgModule({
   declarations: [
     AppComponent
