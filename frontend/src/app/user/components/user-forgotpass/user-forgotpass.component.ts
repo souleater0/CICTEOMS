@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-user-forgotpass',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class UserForgotpassComponent {
   hide = true;
+  newpassForm! : FormGroup;
+  submitted = false;
+
+  get f() {return this.newpassForm.controls};
+
+  resetPassword(){
+
+  }
 }

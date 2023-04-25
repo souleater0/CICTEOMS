@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-8 left">
+      </div>
+      <div class="col-4 right">
+        <!-- Login Start -->
+        <div class="email-container">
+          <header class="bg-dark text-white p-2 mb-2 text-center">
+            <h1>Verify Email</h1>
+          </header>
+          <form [formGroup]="emailForm" (submit)="sendEmail()">
+            <div class="row">
+              <mat-form-field appearance="outline" class="col-12">
+                <mat-label>Email Address</mat-label>
+                <input matInput type="text" placeholder="Ex. Juan" formControlName="email"
+                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                >
+                <mat-error *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                  <span *ngIf="f['email'].errors['required']">Email is required</span>
+                  <span *ngIf="f['email'].errors['email']">Email is invalid</span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row mt-2">
+              <button type="submit" class="btn btn-dark" routerLink="/user/forgot-otp">Send Code</button>
+            </div>
+          </form>
+        </div>
+        <!-- End -->
+      </div>
+    </div>
+  </div>

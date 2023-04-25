@@ -38,6 +38,7 @@ import { UserReportGenerationComponent } from './components/user-report-generati
 //Guards
 import { AuthGuard, UserGuard, NoAuthGuard} from '../guards/auth.guard';
 import {InterceptorService} from './service/interceptor.service';
+import { UserIdentifyComponent } from './components/user-identify/user-identify.component';
 
 //Key Events
 
@@ -60,6 +61,21 @@ const routes:Routes = [
       {
         path: 'user/register',
         component: UserRegisterComponent,
+        canActivate: [NoAuthGuard],
+      },
+      {
+        path: 'user/forgot-otp',
+        component: UserForgototpComponent,
+        canActivate: [NoAuthGuard],
+      },
+      {
+        path: 'user/user-identify',
+        component: UserIdentifyComponent,
+        canActivate: [NoAuthGuard],
+      },
+      {
+        path: 'user/new-password',
+        component: UserForgotpassComponent,
         canActivate: [NoAuthGuard],
       },
     ]
@@ -96,11 +112,6 @@ const routes:Routes = [
 
     ]
   },
-  {
-    path: 'user/forgot-otp',
-    component: UserForgototpComponent,
-    // canActivate: [AuthGuard, UserGuard],
-  },
   // {
   //   path: '**', redirectTo: ''
   // }
@@ -121,6 +132,7 @@ const routes:Routes = [
     ProfileLayoutComponent,
     UserViewAssignedProgramComponent,
     UserReportGenerationComponent,
+    UserIdentifyComponent,
     ],
 
   imports: [

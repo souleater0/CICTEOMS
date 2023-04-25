@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<!-- <div class="container mt-5">
   <header class="bg-dark text-white p-2 mb-2 text-center">
     <h1>Forgot Password</h1>
   </header>
@@ -23,4 +23,41 @@
       <button type="submit" class="btn btn-dark" routerLink="/user/login">Change Password</button>
     </div>
   </form>
+</div> -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8 left">
+    </div>
+    <div class="col-4 right">
+            <!-- NewPass Start -->
+            <div class="newpass-container">
+              <header class="bg-dark text-white p-2 mb-2 text-center">
+                <h1>New Password</h1>
+              </header>
+              <form [formGroup]="newpassForm" (submit)="resetPassword()">
+                <div class="row">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" name="password" formControlName="Password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" name="password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
+                </div>
+                <div class="row mt-2">
+                  <button type="submit" class="btn btn-dark" routerLink="/user/login">Reset Password</button>
+                </div>
+              </form>
+            </div>
+            <!-- End -->
+    </div>
+  </div>
 </div>
