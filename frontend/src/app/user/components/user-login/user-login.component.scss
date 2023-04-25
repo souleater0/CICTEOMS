@@ -21,6 +21,13 @@ a:link {
   bottom: 0;
   width: 35%;
 }
+
+.login-container{
+  margin: auto;
+  width: 60%;
+  padding-top: 30vh;
+}
+
 @media screen and (max-width: 1200.3333px) { //large laptop
   .left{
     width: 70%;

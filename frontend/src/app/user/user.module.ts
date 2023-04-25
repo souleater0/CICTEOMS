@@ -45,7 +45,7 @@ import {InterceptorService} from './service/interceptor.service';
 const routes:Routes = [
   {
     path: '',
-    component: UserLoginComponent,
+    component: LoginLayoutComponent,
     children: [
       {
         path: '',
@@ -55,6 +55,11 @@ const routes:Routes = [
       {
         path: 'user/login',
         component: UserLoginComponent,
+        canActivate: [NoAuthGuard],
+      },
+      {
+        path: 'user/register',
+        component: UserRegisterComponent,
         canActivate: [NoAuthGuard],
       },
     ]
