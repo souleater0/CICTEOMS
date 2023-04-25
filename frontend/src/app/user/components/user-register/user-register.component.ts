@@ -8,8 +8,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./user-register.component.scss']
 })
 export class UserRegisterComponent implements OnInit{
-  registerForm: FormGroup;
+  registerForm !: FormGroup;
   hide = true;
+  submitted = false;
+  
   constructor(
     private formBuilder: FormBuilder,
   ){
@@ -30,7 +32,12 @@ export class UserRegisterComponent implements OnInit{
     const now = new Date();
     this.maxDate = now.toLocaleString();
   }
+  get f() {return this.registerForm.controls};
+
   onSubmit(){
     console.log(this.registerForm);
+  }
+  register(){
+
   }
 }

@@ -1,1 +1,44 @@
-
+.left{
+    background-image: url("./../../../../assets/img/leftbg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 65%;
+  }
+  .right{
+    background-image: url("./../../../../assets/img/rightbg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 35%;
+  }
+  
+  .register-container{
+    margin: auto;
+    width: 60%;
+    padding-top: 15vh;
+  }
+  
+  @media screen and (max-width: 1200.3333px) { //large laptop
+    .left{
+      width: 70%;
+    }
+    .right{
+      width: 30%;
+    }
+  }
+  @media screen and (max-width: 1024.3333px) { //tablet
+    .left{
+      display: none;
+    }
+    .right{
+      width: 100%;
+    }
+  }
+  

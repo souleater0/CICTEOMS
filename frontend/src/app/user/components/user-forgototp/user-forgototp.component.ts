@@ -59,7 +59,7 @@ export class UserForgototpComponent implements OnInit{
       return;
     }
     if(this.otpForm.valid){
-      toastr.success("Check your Email Verification Code.", "Email Sent!");
+      toastr.success("Check your Email Verification Code.", "Code has been Sent!");
     }
 
   }
