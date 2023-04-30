@@ -8,6 +8,8 @@ use App\Models\Faculty;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTExceptions;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
+
 
 class FacultyController extends Controller
 {
@@ -21,18 +23,23 @@ class FacultyController extends Controller
             $response['code']=409;
         }
         else{
+
+            $randomid = rand(1000, 9999);
+            $faculty_id = 'f'.time().''.$randomid;
+            //format date
             $faculty = Faculty::create([
-                'faculty_id' => $request->faculty_id,
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'middle_name' => $request->middle_name,
-                'gender' => $request->gender,
-                'birth_date' => $request->birth_date,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'facultyType' => $request->facultyType
+                'faculty_id' => $faculty_id,
+                'first_name' => $request->first_Name,
+                'last_name' => $request->last_Name,
+                'middle_name' => $request->middle_Name,
+                'gender' => $request->Gender,
+                'birth_date' => $request->Birthdate,
+                'email' => $request->Email,
+                'password' => Hash::make($request->Password),
+                'facultyType' => $request->ftype,
             ]);
             $response['status'] = 1;
+            $response['success'] = true;
             $response['message'] = 'Faculty User Registered Successfully';
             $response['code']=200;
         }

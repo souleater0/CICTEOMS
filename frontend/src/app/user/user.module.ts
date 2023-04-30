@@ -6,7 +6,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
@@ -42,6 +41,26 @@ import { UserIdentifyComponent } from './components/user-identify/user-identify.
 
 //Key Events
 
+//DateFormat
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+
+
+
+//Date Format
+const MY_DATE_FORMAT = {
+  parse: {
+    //'YYYY/MM/DD'
+    dateInput: 'YYYY/MM/DD', // this is how your date will be parsed from Input
+  },
+  display: {
+    dateInput: 'YYYY/MM/DD', // this is how your date will get displayed on the Input
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  }
+};
 
 const routes:Routes = [
   {
@@ -162,7 +181,14 @@ const routes:Routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true
-    }
+    },
+    { 
+      provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] 
+    },
+    { 
+      provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT 
+    },
   ],
 })
-export class UserModule { }
+export class UserModule {
+}

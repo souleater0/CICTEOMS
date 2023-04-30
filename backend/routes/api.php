@@ -39,9 +39,23 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('user/register',[FacultyController::class,'register']);
 Route::post('user/login',[FacultyController::class,'login']);
 
+//Get Users
+Route::get('/users', function () {
+    return App\Models\Faculty::whereNull('email_verified_at')->get();
+});
+
+//Verify Users
+Route::put('/users/{id}', function ($id, Request $request) {
+    $user = App\Models\Faculty::findOrFail($id);
+    
+    $user->email_verified_at = $request->input('email_verified_at');
+
+    $user->save();
+    return response()->json($user);
+});
+
 //User Process
 Route::post('user/send-email-code',[verificationController::class,'sendVerificationCode']);
-
 
 // //Admin Route
 Route::post('admin/register',[AdminController::class,'register']);

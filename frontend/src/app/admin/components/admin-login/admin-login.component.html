@@ -1,27 +1,36 @@
-<div class="container mt-5">
-  <header class="bg-dark text-white p-2 mb-2 text-center">
-    <h1>Admin Login</h1>
-  </header>
-  <form [formGroup]="loginForm" (submit)="login()">
-    <div class="row">
-      <mat-form-field appearance="outline" class="col-12">
-        <mat-label>Email Address</mat-label>
-        <input matInput placeholder="Ex. Juan" formControlName="email">
-        <!-- <mat-hint>Hint</mat-hint> -->
-      </mat-form-field>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8 left">
+      <div class="dot"></div>
     </div>
-    <div class="row">
-      <mat-form-field appearance="outline" class="col-12">
-        <mat-label>Password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field>
+    <div class="col-4 right">
+      <!-- Login Start -->
+      <div class="login-container">
+        <div class="Login-lbl">ADMIN LOGIN</div>
+        <form [formGroup]="loginForm" (submit)="login()">
+          <div class="row">
+            <mat-form-field appearance="outline" class="col-12">
+              <mat-label>Email Address</mat-label>
+              <input matInput placeholder="Ex. Juan@gmail.com" formControlName="email">
+              <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline" class="col-12">
+              <mat-label>Password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+          <div class="float-end" routerLink="/admin/reset-password">Reset Password </div><br>
+          <div class="row mt-2">
+            <button type="submit" class="btn btn-dark">Login</button>
+          </div>
+        </form>
+      </div>
+      <!-- End -->
     </div>
-    <div class="float-end" routerLink="/user/forgot-otp">Forgot Password </div><br>
-    <div class="row">
-      <button type="submit" class="btn btn-dark">Login</button>
-    </div>
-  </form>
+  </div>
 </div>

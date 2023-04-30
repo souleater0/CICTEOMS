@@ -1,11 +1,12 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-8 left">
+      <div class="dot"></div>
     </div>
     <div class="col-4 right">
       <!-- Login Start -->
       <div class="login-container">
-        <span>Login</span>
+        <div class="Login-lbl">LOG IN</div>
         <form [formGroup]="loginForm" (submit)="login()">
           <div class="row">
             <mat-form-field appearance="outline" class="col-12">
@@ -36,6 +37,11 @@
           <div class="float-end" routerLink="/user/user-identify">Forgot Password </div><br>
           <div class="row mt-2">
             <button type="submit" class="btn btn-dark">Login</button>
+            <div class="register">
+              <div class="col mt-5 text-center">
+                <span>Don't have an account yet?  <a class="reg" routerLink="/user/register">Sign Up</a></span>
+              </div>
+            </div>
           </div>
         </form>
       </div>

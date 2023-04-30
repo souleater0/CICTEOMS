@@ -5,7 +5,7 @@
     <div class="col-4 right">
       <!-- OTP Start -->
       <div class="register-container">
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
           <div class="row">
             <mat-form-field appearance="outline" class="col-12">
               <mat-label>First Name</mat-label>
@@ -30,18 +30,20 @@
           <div class="row">
             <mat-form-field appearance="outline">
               <mat-label>Date of birth</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="Birthdate" name="birthday" placeholder="MM/DD/YYYY">
+              <input matInput [matDatepicker]="picker" formControlName="Birthdate" name="Birthdate" placeholder="YYYY/MM/DD">
               <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
               <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
+            <mat-radio-group aria-label="Select an option" name="ftype" formControlName="ftype">
+              <mat-label><b>Faculty Type</b></mat-label>
+              <mat-radio-button value="REGULAR">Regular</mat-radio-button>
+              <mat-radio-button value="PART TIME">Part Time</mat-radio-button>
+            </mat-radio-group>
             <mat-form-field appearance="outline">
               <mat-label>Email</mat-label>
               <input matInput type="email" placeholder="Ex. test@gmail.com" formControlName="Email" name="email">
             </mat-form-field>
-          </div>
-          <div class="row">
-      
           </div>
           <div class="row">
             <mat-form-field appearance="outline">

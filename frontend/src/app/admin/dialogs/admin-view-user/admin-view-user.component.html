@@ -1,0 +1,63 @@
+<!-- <h1>{{ data.first_name }} {{ data.last_name }}</h1>
+<p>ID: {{ data.id }}</p>
+<p>Faculty Type: {{ data.facultyType }}</p>
+<p>Email: {{ data.email }}</p> -->
+
+<div class="mat-dialog-container">
+    <div class="modal-header">
+        <h2 mat-dialog-title>Personal Information</h2>
+    </div>
+    <mat-dialog-content class="mat-typography text-dark">
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label fw-bold">Last Name</label>
+                    <input type="text" class="form-control" value="{{ data.last_name }}" readonly>
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label fw-bold">First Name</label>
+                    <input type="text" class="form-control" value="{{ data.first_name }}" readonly>
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label fw-bold">Middle Name</label>
+                    <input type="text" class="form-control" value="{{ data.middle_name }}" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label fw-bold">Gender</label>
+                    <input type="text" class="form-control" value="{{ data.gender}}" readonly>
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label fw-bold">Faculty Type</label>
+                    <input type="text" class="form-control" value="{{ data.facultyType }}" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label fw-bold">Email Address</label>
+                    <input type="text" class="form-control" value="{{ data.email }}" readonly>
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label fw-bold">Date Created</label>
+                    <input type="text" class="form-control" value="{{ data.created_at | date:'MM/dd/yyyy' }}" readonly>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close class="fw-bold border">CLOSE</button>
+    </mat-dialog-actions>
+</div>

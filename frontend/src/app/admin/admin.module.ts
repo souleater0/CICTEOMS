@@ -38,6 +38,13 @@ import { AdminAccountmanagementComponent } from './components/admin-accountmanag
 
 //admin Auth Guard
 import { AuthGuard, AdminGuard } from '../guards/auth.guard';
+import { AdminViewUserComponent } from './dialogs/admin-view-user/admin-view-user.component';
+
+//Table
+
+//BOOTSTRAP
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 const routes:Routes = [
   {
@@ -52,6 +59,10 @@ const routes:Routes = [
       {
         path: 'login',
         component: AdminLoginComponent,
+      },
+      {
+        path: 'reset-password',
+        component: AdminResetpasswordComponent,
       },
     ]
   },
@@ -111,10 +122,12 @@ const routes:Routes = [
     AdminProfileComponent,
     HomeLayoutComponent,
     LoginLayoutComponent,
+    AdminAccountmanagementComponent,
     AdminEpmComponent,
     AdminDashboardComponent,
     AdminPartnersmanagementComponent,
-    AdminReportgenerationComponent
+    AdminReportgenerationComponent,
+    AdminViewUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -136,6 +149,7 @@ const routes:Routes = [
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
+    NgbModule,
     RouterModule.forRoot(routes)
   ],
 

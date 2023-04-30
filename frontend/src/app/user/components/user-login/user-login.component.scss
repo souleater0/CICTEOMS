@@ -25,9 +25,28 @@ a:link {
 .login-container{
   margin: auto;
   width: 60%;
-  padding-top: 30vh;
+  padding-top: 25vh;
 }
 
+.Login-lbl{
+  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 40px;
+  margin-left: -20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dot{
+  background-image: url("../../../../assets/img/vectorcircle1.png");
+  position: absolute;
+  margin: auto;
+  width: 60%;
+  top: 0;
+  left:0;
+  width: auto;
+  height: 20px;
+
+}
 @media screen and (max-width: 1200.3333px) { //large laptop
   .left{
     width: 70%;
