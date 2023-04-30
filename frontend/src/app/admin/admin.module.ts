@@ -37,7 +37,7 @@ import { AdminReportgenerationComponent } from './components/admin-reportgenerat
 import { AdminAccountmanagementComponent } from './components/admin-accountmanagement/admin-accountmanagement.component';
 
 //admin Auth Guard
-import { AuthGuard, AdminGuard } from '../guards/auth.guard';
+import { AuthGuard, AdminGuard, NoAuthGuard } from '../guards/auth.guard';
 import { AdminViewUserComponent } from './dialogs/admin-view-user/admin-view-user.component';
 
 //Table
@@ -49,31 +49,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 const routes:Routes = [
   {
     path: 'admin',
-    component: LoginLayoutComponent,
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'login',
-      },
-      {
-        path: 'login',
-        component: AdminLoginComponent,
-      },
-      {
-        path: 'reset-password',
-        component: AdminResetpasswordComponent,
-      },
-    ]
-  },
-  {
-    path: 'admin',
     component: HomeLayoutComponent,
     children: [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'dashboard'
+        redirectTo: 'dashboard',
       },
       {
         path: 'dashboard',
@@ -105,8 +86,25 @@ const routes:Routes = [
         component: AdminProfileComponent,
         canActivate: [AuthGuard, AdminGuard],
       },
+      
     ]
-  }
+  },
+  {
+    path: 'admin',
+    component: LoginLayoutComponent,
+    children: [
+      {
+        path: 'login',
+        component: AdminLoginComponent,
+        canActivate: [NoAuthGuard],
+      },
+      {
+        path: 'reset-password',
+        component: AdminResetpasswordComponent,
+        canActivate: [NoAuthGuard],
+      },
+    ]
+  },
   // {
   //   path: '**', redirectTo: ''
   // }

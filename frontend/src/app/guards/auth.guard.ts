@@ -115,11 +115,11 @@ export class NoAuthGuard implements CanActivate {
     const token = localStorage.getItem('access_token');
     if (token!==null && token!=='') {
       const tokenPayload = jwt_decode(token) as TokenPayload;
-      if(tokenPayload.role=='user'){
+      if(tokenPayload.role==='user'){
         this.router.navigate(['/user']);
         return false;
       }
-      else if(tokenPayload.role=='admin'){
+      else if(tokenPayload.role==='admin'){
         this.router.navigate(['/admin']);
         return false;
       }

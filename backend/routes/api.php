@@ -47,9 +47,7 @@ Route::get('/users', function () {
 //Verify Users
 Route::put('/users/{id}', function ($id, Request $request) {
     $user = App\Models\Faculty::findOrFail($id);
-    
     $user->email_verified_at = $request->input('email_verified_at');
-
     $user->save();
     return response()->json($user);
 });
