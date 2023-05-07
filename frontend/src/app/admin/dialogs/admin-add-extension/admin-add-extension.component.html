@@ -1,0 +1,100 @@
+<div class="mat-dialog-container">
+    <div class="modal-header">
+        <h2 mat-dialog-title>Add Extension Information</h2>
+    </div>
+    <!-- FORM START HERE -->
+    <form [formGroup]="extensionForm" (ngSubmit)="addExtension()">
+        <mat-dialog-content class="mat-typography text-dark">
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field appearance="outline" style="width:100%;">
+                        <mat-label>Program Title</mat-label>
+                        <input matInput type="text" placeholder="Ex. Incognito" formControlName="program_Title">
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline" style="width:100%;">
+                        <mat-label>Date of Partnership</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate placeholder="Start date" formControlName="start_Date">
+                            <input matEndDate placeholder="End date" formControlName="end_Date">
+                        </mat-date-range-input>
+                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Place</mat-label>
+                    <input matInput type="text" placeholder="Ex. Bulacan State University" formControlName="place">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Program Lead</mat-label>
+                    <input matInput type="text" placeholder="Faculty Lead" formControlName="program_Lead">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Program Members</mat-label>
+                    <textarea matInput type="text" placeholder="Faculty Members" formControlName="program_Members" (keyup)="onInputChange()"> </textarea>
+                </mat-form-field>
+                <div *ngIf="suggestions.length > 0">
+                    <ul>
+                      <li *ngFor="let suggestion of suggestions" (click)="onSuggestionClick(suggestion)">{{ suggestion }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Participants</mat-label>
+                    <textarea matInput type="text" placeholder="Ex. Group of Bulacan State University" formControlName="participants"></textarea>
+                  </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Program Flow</mat-label>
+                    <textarea matInput type="text" placeholder="Enter Program Flow" formControlName="program_Flow"></textarea>
+                  </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Program Details</mat-label>
+                    <textarea matInput type="text" placeholder="(If applicable)" formControlName="program_Details"></textarea>
+                  </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Partners</mat-label>
+                    <mat-select placeholder="Select Partner" formControlName="partners">
+                        <mat-option *ngFor="let listPartner of listPartners" value="{{ listPartner.partnersName }}">{{ listPartner.partnersName }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+            <div class="row">
+                Upload the following (if applicable):
+            </div>
+            <div class="row">
+                <b>Certificate:</b> <input type="file" (change)="getFile($event)"><br>
+            </div>
+            <div class="row">
+                <b>Participant's Attendance:</b> <input type="file" (change)="getFile($event)"><br>
+            </div>
+            <div class="row">
+                <b>Invitation:</b> <input type="file" (change)="getFile($event)"><br>
+            </div>
+            <div class="row">
+                <b>Others:</b> <input type="file" (change)="getFile($event)"><br>
+            </div>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-button mat-dialog-close class="fw-bold border bg-danger text-white">CLOSE</button>
+            <button mat-button class="fw-bold border bg-primary text-white" type="submit">Add</button>
+        </mat-dialog-actions>
+    </form>
+    <!-- END -->
+</div>
+

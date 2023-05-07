@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-
+import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { AdminInfoService } from '../../services/admin-info.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -9,11 +11,18 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class AdminHeaderComponent implements OnInit{
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus: boolean = false;
-  constructor(
 
+  firstName='';
+  
+  constructor(
+    private http: HttpClient,
+    private service: AdminInfoService,
   ) {}
 
   ngOnInit(): void {
+    this.service.getAdminInfo().subscribe((data)=>{
+      this.firstName = data.data.first_name;
+    })
   }
 
   SideNavToggle(){

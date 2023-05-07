@@ -77,7 +77,7 @@ export class UserLoginComponent implements OnInit {
         // console.log(response);
         if(response.success==true){
           localStorage.setItem('access_token', response.data.access_token);
-          this.router.navigate(['/user/home']);
+          this.router.navigate(['/user/view-assigned-program']);
           toastr.success("Login Succesful!", "Information");
         }
       }, error => {

@@ -1,88 +1,181 @@
 <div class="container-fluid">
-    <div class="partner-management">
-        <div class="row">
-            <div class="col-12">
-                <div class="float-end">
-                    <button mat-raised-button (click)="openAddEditEmpForm()">
-                        ADD/UPDATE PARTNER
-                    </button>
+<div class="active-expired-container">
+  <div class="card">
+    <div class="card-body pt-3">
+       <ul class="nav nav-tabs nav-tabs-bordered">
+          <li class="nav-item"> <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#active-partner">Active Partner</button></li>
+          <li class="nav-item"> <button class="nav-link" data-bs-toggle="tab" data-bs-target="#inactive-partner">Expired Partner</button></li>
+       </ul>
+       <div class="tab-content pt-2">
+          <div class="tab-pane fade show active active-partner" id="active-partner">
+              <div class="partner-management">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="float-end">
+                            <button mat-raised-button (click)="addPartner()">
+                                ADD PARTNER
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-3">
+                        <mat-form-field style="width: 100%;">
+                            <mat-label>Filter</mat-label>
+                            <input matInput (keyup)="FilterActive($event)" placeholder="Ex. Mia" #input>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                        <div class="table-container">
+                            <table mat-table [dataSource]="activeSource" matSort>
+                              <!-- ID Column -->
+                              <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                              </ng-container>
+                        
+                              <!-- Progress Column -->
+                              <ng-container matColumnDef="partnersName">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Partner's Name </th>
+                                <td mat-cell *matCellDef="let row"> {{row.partnersName}}</td>
+                              </ng-container>
+            
+                              <ng-container matColumnDef="contactPerson">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Person </th>
+                                <td mat-cell *matCellDef="let row"> {{row.contactPerson}}</td>
+                              </ng-container>
+            
+                              <ng-container matColumnDef="contactNumber">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Number </th>
+                                <td mat-cell *matCellDef="let row"> {{row.contactNo}}</td>
+                              </ng-container>
+            
+                              <ng-container matColumnDef="address">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+                                <td mat-cell *matCellDef="let row"> {{row.address}}</td>
+                              </ng-container>
+                        
+                              <ng-container matColumnDef="startofPartnership">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Start of Partnership </th>
+                                <td mat-cell *matCellDef="let row"> {{row.startDate | date}}</td>
+                              </ng-container>
+            
+                              <ng-container matColumnDef="endofPartnership">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> End of Partnership </th>
+                                <td mat-cell *matCellDef="let row"> {{row.endDate | date}}</td>
+                              </ng-container>
+                        
+                              <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                                <td mat-cell *matCellDef="let row">
+                                  <button mat-icon-button color="primary" (click)="viewPartner(row.id)">
+                                    <mat-icon>edit</mat-icon>
+                                  </button>
+                                  <button mat-icon-button color="warn" (click)="archivePartner(row.id)">
+                                    <mat-icon>delete</mat-icon>
+                                  </button>
+                                  <button mat-icon-button color="warn">
+                                    <mat-icon>download</mat-icon>
+                                  </button>
+                                </td>
+                              </ng-container>
+                        
+                              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        
+                              <!-- Row shown when there is no matching data. -->
+                              <tr class="mat-row" *matNoDataRow>
+                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                              </tr>
+                            </table>
+                        
+                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                          </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12 mt-3">
-                <mat-form-field style="width: 100%;">
-                    <mat-label>Filter</mat-label>
-                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-                </mat-form-field>
+          </div>
+          <div class="tab-pane fade inactive-partner pt-3" id="inactive-partner">
+              <div class="inactive-partner-management">
+                <div class="row">
+                    <div class="col-12 mt-3">
+                        <mat-form-field style="width: 100%;">
+                            <mat-label>Filter</mat-label>
+                            <input matInput (keyup)="FilterInactive($event)" placeholder="Ex. Mia" #input>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                        <div class="table-container">
+                            <table mat-table [dataSource]="inactiveSource" matSort>
+                              <!-- ID Column -->
+                              <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                                <td mat-cell *matCellDef="let row" class="expired"> {{row.id}} </td>
+                              </ng-container>
+                        
+                              <!-- Progress Column -->
+                              <ng-container matColumnDef="partnersName">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Partner's Name </th>
+                                <td mat-cell *matCellDef="let row" class="expired"> {{row.partnersName}}</td>
+                              </ng-container>
+            
+                              <ng-container matColumnDef="contactPerson">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Person </th>
+                                <td mat-cell *matCellDef="let row" class="expired"> {{row.contactPerson}}</td>
+                              </ng-container>
+            
+                              <ng-container matColumnDef="contactNumber">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Number </th>
+                                <td mat-cell *matCellDef="let row" class="expired"> {{row.contactNo}}</td>
+                              </ng-container>
+            
+                              <ng-container matColumnDef="address">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+                                <td mat-cell *matCellDef="let row" class="expired"> {{row.address}}</td>
+                              </ng-container>
+                        
+                              <ng-container matColumnDef="startofPartnership">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Start of Partnership </th>
+                                <td mat-cell *matCellDef="let row" class="expired"> {{row.startDate | date}}</td>
+                              </ng-container>
+            
+                              <ng-container matColumnDef="endofPartnership">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> End of Partnership </th>
+                                <td mat-cell *matCellDef="let row" class="expired"> {{row.endDate | date}}</td>
+                              </ng-container>
+                        
+                              <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                                <td mat-cell *matCellDef="let row">
+                                  <button mat-icon-button color="primary" (click)="viewPartner(row.id)">
+                                    <mat-icon>edit</mat-icon>
+                                  </button>
+                                  <button mat-icon-button color="warn" (click)="archivePartner(row.id)">
+                                    <mat-icon>delete</mat-icon>
+                                  </button>
+                                  <button mat-icon-button color="warn">
+                                    <mat-icon>download</mat-icon>
+                                  </button>
+                                </td>
+                              </ng-container>
+                        
+                              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        
+                              <!-- Row shown when there is no matching data. -->
+                              <tr class="mat-row" *matNoDataRow>
+                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                              </tr>
+                            </table>
+                        
+                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                          </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-12">
-                <div class="table-container">
-                    <table mat-table [dataSource]="dataSource" matSort>
-                      <!-- ID Column -->
-                      <ng-container matColumnDef="id">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-                        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-                      </ng-container>
-                
-                      <!-- Progress Column -->
-                      <ng-container matColumnDef="firstName">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
-                        <td mat-cell *matCellDef="let row"> {{row.firstName}}</td>
-                      </ng-container>
-                
-                      <ng-container matColumnDef="lastName">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
-                        <td mat-cell *matCellDef="let row"> {{row.lastName}}</td>
-                      </ng-container>
-                
-                      <ng-container matColumnDef="address">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
-                        <td mat-cell *matCellDef="let row"> {{row.address}}</td>
-                      </ng-container>
-                
-                      <ng-container matColumnDef="dateofPartnership">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date of Partnership </th>
-                        <td mat-cell *matCellDef="let row"> {{row.dateofPartnership | date}}</td>
-                      </ng-container>
-                
-                      <ng-container matColumnDef="contactPerson">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Person </th>
-                        <td mat-cell *matCellDef="let row"> {{row.contactPerson}}</td>
-                      </ng-container>
-                
-                      <ng-container matColumnDef="contactNumber">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Person </th>
-                        <td mat-cell *matCellDef="let row"> {{row.contactNumber}}</td>
-                      </ng-container>
-                
-                      <ng-container matColumnDef="action">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                        <td mat-cell *matCellDef="let row">
-                          <button mat-icon-button color="primary" (click)="openEditForm(row)">
-                            <mat-icon>edit</mat-icon>
-                          </button>
-                          <button mat-icon-button color="warn" (click)="deleteFaculty(row.id)">
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                          <button mat-icon-button color="warn">
-                            <mat-icon>download</mat-icon>
-                          </button>
-                        </td>
-                      </ng-container>
-                
-                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                
-                      <!-- Row shown when there is no matching data. -->
-                      <tr class="mat-row" *matNoDataRow>
-                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                      </tr>
-                    </table>
-                
-                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-                  </div>
-            </div>
-        </div>
+          </div>
+       </div>
     </div>
+ </div>
+</div>
 </div>

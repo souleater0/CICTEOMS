@@ -46,8 +46,11 @@ class Faculty extends Authenticatable implements JWTSubject
         'email',
         'password',
         'facultyType',
-        'status'
     ];
     protected $table = 'faculties';
 
+    // public function extensions()
+    // {
+    //     return $this->belongsToMany(Extension::class, 'faculty_extension', 'faculty_id', 'extension_id');
+    // }
 }

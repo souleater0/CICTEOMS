@@ -46,8 +46,6 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
-
-
 //Date Format
 const MY_DATE_FORMAT = {
   parse: {
@@ -106,12 +104,7 @@ const routes:Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'home',
-      },
-      {
-        path: 'home',
-        component: UserHomeComponent,
-        canActivate: [AuthGuard, UserGuard],
+        redirectTo: 'view-assigned-program',
       },
       {
         path: 'profile',
@@ -152,8 +145,7 @@ const routes:Routes = [
     UserViewAssignedProgramComponent,
     UserReportGenerationComponent,
     UserIdentifyComponent,
-    ],
-
+  ],
   imports: [
     CommonModule,
     UserRoutingModule,

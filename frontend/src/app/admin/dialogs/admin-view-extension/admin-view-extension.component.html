@@ -1,0 +1,93 @@
+<div class="mat-dialog-container">
+    <div class="modal-header">
+        <h2 mat-dialog-title>Add Extension Information</h2>
+    </div>
+    <!-- FORM START HERE -->
+        <mat-dialog-content class="mat-typography text-dark">
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field appearance="outline" style="width:100%;">
+                        <mat-label>Program Title</mat-label>
+                        <input matInput type="text" placeholder="Ex. Incognito" value="{{data.data.programTitle}}" [(ngModel)]="program_Title">
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Date of Partnership</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate placeholder="Start date" value="{{ data.data.startDate }}" [(ngModel)]="start_Date">
+                            <input matEndDate placeholder="End date" value="{{ data.data.endDate }}" [(ngModel)]="end_Date">
+                        </mat-date-range-input>
+                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Place</mat-label>
+                    <input matInput type="text" placeholder="Ex. Bulacan State University" value="{{ data.data.place }}" [(ngModel)]="place">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Program Lead</mat-label>
+                    <input matInput type="text" placeholder="Faculty Lead" value="{{ data.data.programLead }}" [(ngModel)]="program_Lead">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Program Members</mat-label>
+                    <textarea matInput type="text" placeholder="Faculty Members" value="{{ data.data.programMembers }}" [(ngModel)]="program_Members"> </textarea>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Participants</mat-label>
+                    <textarea matInput type="text" placeholder="Ex. Group of Bulacan State University" value="{{ data.data.participants }}" [(ngModel)]="participants"></textarea>
+                  </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Program Flow</mat-label>
+                    <textarea matInput type="text" placeholder="Enter Program Flow" value="{{ data.data.programFlow }}" [(ngModel)]="program_Flow"></textarea>
+                  </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Program Details</mat-label>
+                    <textarea matInput type="text" placeholder="(If applicable)" value="{{ data.data.programDetails }}" [(ngModel)]="program_Details"></textarea>
+                  </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Partners</mat-label>
+                    <mat-select placeholder="Select Partner" [(ngModel)]="selectedPartner">
+                      <mat-option *ngFor="let listPartner of listPartners" value="{{ listPartner.partnersName }}">{{ listPartner.partnersName }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+            <div class="row">
+                Upload the following (if applicable):
+            </div>
+            <div class="row">
+                <b>Certificate:</b> <input type="file" (change)="getFile($event)"><br>
+            </div>
+            <div class="row">
+                <b>Participant's Attendance:</b> <input type="file" (change)="getFile($event)"><br>
+            </div>
+            <div class="row">
+                <b>Invitation:</b> <input type="file" (change)="getFile($event)"><br>
+            </div>
+            <div class="row">
+                <b>Others:</b> <input type="file" (change)="getFile($event)"><br>
+            </div>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-button mat-dialog-close class="fw-bold border bg-danger text-white">CLOSE</button>
+            <button mat-button class="fw-bold border bg-primary text-white" (click)="updateExtension(data.data.id)">Update</button>
+        </mat-dialog-actions>
+    <!-- END -->
+</div>
+

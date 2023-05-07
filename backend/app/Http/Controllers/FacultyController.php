@@ -15,36 +15,36 @@ class FacultyController extends Controller
 {
     public function register(Request $request){
 
-        $faculty = Faculty::where('email',$request['email'])->first();
+        $faculty = Faculty::where('email',$request['Email'])->first();
 
         if($faculty){
             $response['status'] = 0;
             $response['message'] = 'Faculty User Already Exist!';
             $response['code']=409;
+            return response()->json($response,409);
         }
         else{
-
             $randomid = rand(1000, 9999);
             $faculty_id = 'f'.time().''.$randomid;
             //format date
             $faculty = Faculty::create([
                 'faculty_id' => $faculty_id,
-                'first_name' => $request->first_Name,
-                'last_name' => $request->last_Name,
-                'middle_name' => $request->middle_Name,
-                'gender' => $request->Gender,
-                'birth_date' => $request->Birthdate,
-                'email' => $request->Email,
-                'password' => Hash::make($request->Password),
-                'facultyType' => $request->ftype,
+                'first_name' => $request->input('first_Name'),
+                'last_name' => $request->input('last_Name'),
+                'middle_name' => $request->input('middle_Name'),
+                'gender' => $request->input('Gender'),
+                'birth_date' => $request->input('Birthdate'),
+                'email' => $request->input('Email'),
+                'password' => Hash::make($request->input('Password')),
+                'facultyType' => $request->input('ftype'),
             ]);
             $response['status'] = 1;
             $response['success'] = true;
             $response['message'] = 'Faculty User Registered Successfully';
             $response['code']=200;
+            return response()->json($response);
         }
-
-        return response()->json($response);
+        
     }
 
     public function login(Request $request){
@@ -115,5 +115,16 @@ class FacultyController extends Controller
             'message' => 'User Login Successful',
             'success' => true
         ],200);
+    }
+    public function suggestPartner(Request $request){
+        $query = $request->input('q');
+        $partners = Faculty::where('first_name', 'like', '%' . $query . '%')->get();
+        // $suggestions = $partners->pluck('first_name');
+
+        $suggestions = $partners->map(function ($partners) {
+            return $partners->last_name .' '.$partners->first_name;
+        })->toArray();
+        
+        return response()->json($suggestions);
     }
 }

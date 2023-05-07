@@ -69,6 +69,9 @@ export class AdminAccountmanagementComponent implements OnInit {
       } else {
         // Handle the case where the API response is empty or undefined
         console.log('API response is empty or undefined');
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }
     }, error => {
       // Handle the case where the API request fails
@@ -78,6 +81,7 @@ export class AdminAccountmanagementComponent implements OnInit {
   isEqual(a: any[], b: any[]) {
     return JSON.stringify(a) === JSON.stringify(b);
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -95,12 +99,11 @@ export class AdminAccountmanagementComponent implements OnInit {
           left: '30%',
           right: '30%',
           bottom: 'auto',
-          
         },
         data: row,
     });
-
   }
+  
   clickAccept(row: any){
     //Philippine Time
     const philippineTime = {

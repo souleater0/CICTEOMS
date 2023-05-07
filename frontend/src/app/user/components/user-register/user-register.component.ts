@@ -78,8 +78,8 @@ export class UserRegisterComponent implements OnInit{
 
     this.http.post(`${this.apiUrl}/user/register`, payload)
       .subscribe((response: any) => {
-        // console.log(response);
         if(response.success==true){
+          console.log(response);
           toastr.success("Kindly wait for admin confirmation.", "Register Successful!");
         }
       }, error => {
@@ -87,7 +87,7 @@ export class UserRegisterComponent implements OnInit{
         console.log(error);
       });
     
-    console.log(payload);
+    // console.log(payload);
     // console.log(this.registerForm.value);
   }
 }

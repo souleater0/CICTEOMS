@@ -10,7 +10,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -36,14 +36,24 @@ import { AdminPartnersmanagementComponent } from './components/admin-partnersman
 import { AdminReportgenerationComponent } from './components/admin-reportgeneration/admin-reportgeneration.component';
 import { AdminAccountmanagementComponent } from './components/admin-accountmanagement/admin-accountmanagement.component';
 
+//Date
+import { DatePipe } from '@angular/common';
+
+
+//Dialogs
+import { AdminViewUserComponent } from './dialogs/admin-view-user/admin-view-user.component';
+
 //admin Auth Guard
 import { AuthGuard, AdminGuard, NoAuthGuard } from '../guards/auth.guard';
-import { AdminViewUserComponent } from './dialogs/admin-view-user/admin-view-user.component';
 
 //Table
 
 //BOOTSTRAP
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminViewPartnerComponent } from './dialogs/admin-view-partner/admin-view-partner.component';
+import { AdminAddPartnerComponent } from './dialogs/admin-add-partner/admin-add-partner.component';
+import { AdminAddExtensionComponent } from './dialogs/admin-add-extension/admin-add-extension.component';
+import { AdminViewExtensionComponent } from './dialogs/admin-view-extension/admin-view-extension.component';
 
 
 const routes:Routes = [
@@ -126,6 +136,10 @@ const routes:Routes = [
     AdminPartnersmanagementComponent,
     AdminReportgenerationComponent,
     AdminViewUserComponent,
+    AdminViewPartnerComponent,
+    AdminAddPartnerComponent,
+    AdminAddExtensionComponent,
+    AdminViewExtensionComponent,
   ],
   imports: [
     BrowserModule,
@@ -148,9 +162,12 @@ const routes:Routes = [
     MatSortModule,
     MatSnackBarModule,
     NgbModule,
+    FormsModule,
     RouterModule.forRoot(routes)
   ],
-
+  providers:[
+    DatePipe
+  ],
 })
 export class AdminModule {
   constructor(

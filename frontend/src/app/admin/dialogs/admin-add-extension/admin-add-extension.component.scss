@@ -1,0 +1,23 @@
+.modal-header{
+    border-bottom: 1px solid #e9ecef !important;
+    padding: 0;
+    margin: 0;
+}
+.suggestions {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  .suggestion {
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .suggestion:hover {
+    background-color: #f2f2f2;
+  }

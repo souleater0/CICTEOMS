@@ -27,10 +27,12 @@ export class AuthGuard implements CanActivate {
         const currentTime = Math.floor(Date.now() / 1000);
         if(tokenPayload.exp < currentTime){
           if(tokenPayload.role==='user'){
+            localStorage.removeItem('access_token');
             this.router.navigate(['/user/login']); //redirect to login if token is expired
             return false;
           }
           else if(tokenPayload.role==='admin'){
+            localStorage.removeItem('access_token');
             this.router.navigate(['/admin/login']); //redirect to login if token is expired
             return false;
           }

@@ -8,8 +8,8 @@
            <div class="card">
               <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                  <img src="assets/img/elisha.png" alt="Profile" class="rounded-circle">
-                 <h2>Elisha</h2>
-                 <h3>Faculty</h3>
+                 <h2>{{firstName}}</h2>
+                 <h3>Admin</h3>
                  <div class="social-links mt-2"> <a href="#" class="twitter"><i class="bi bi-twitter"></i></a> <a href="#" class="facebook"><i class="bi bi-facebook"></i></a> <a href="#" class="instagram"><i class="bi bi-instagram"></i></a> <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a></div>
               </div>
            </div>
@@ -28,15 +28,11 @@
                        <h5 class="card-title">Profile Details</h5>
                        <div class="row">
                           <div class="col-lg-3 col-md-4 label ">Full Name:</div>
-                          <div class="col-lg-9 col-md-8">Elisha Joy Castro</div>
+                          <div class="col-lg-9 col-md-8">{{firstName}} {{middleName}} {{lastName}}</div>
                        </div>
                        <div class="row">
-                         <div class="col-lg-3 col-md-4 label ">Faculty Type:</div>
-                         <div class="col-lg-9 col-md-8">Regular</div>
-                      </div>
-                       <div class="row">
                           <div class="col-lg-3 col-md-4 label">Email</div>
-                          <div class="col-lg-9 col-md-8"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e982c788878d8c9b9a8687a98c91888499858cc78a8684">[email&#160;protected]</a></div>
+                          <div class="col-lg-9 col-md-8"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e982c788878d8c9b9a8687a98c91888499858cc78a8684">[{{email}}]</a></div>
                        </div>
                     </div>
                     <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
@@ -52,7 +48,7 @@
                           </div>
                           <div class="row mb-3">
                              <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
-                             <div class="col-md-8 col-lg-9"> <input name="fullName" type="text" class="form-control" id="fullName" value="Elisha Joy Castro"></div>
+                             <div class="col-md-8 col-lg-9"> <input name="fullName" type="text" class="form-control" id="fullName" value="{{firstName}} {{middleName}} {{lastName}}"></div>
                           </div>
                           <div class="row mb-3">
                             <label for="facultyType" class="col-md-4 col-lg-3 col-form-label">Faculty Type</label>
@@ -60,15 +56,7 @@
                          </div>
                           <div class="row mb-3">
                              <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                             <div class="col-md-8 col-lg-9"> <input name="email" type="email" class="form-control" id="Email" value="e.castro@example.com"></div>
-                          </div>
-                          <div class="row mb-3">
-                             <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                             <div class="col-md-8 col-lg-9"> <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#"></div>
-                          </div>
-                          <div class="row mb-3">
-                             <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                             <div class="col-md-8 col-lg-9"> <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#"></div>
+                             <div class="col-md-8 col-lg-9"> <input name="email" type="email" class="form-control" id="Email" value="{{email}}"></div>
                           </div>
                           <div class="text-center"> <button type="submit" class="btn btn-primary">Save Changes</button></div>
                        </form>

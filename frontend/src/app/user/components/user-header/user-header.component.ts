@@ -1,6 +1,7 @@
 import {  Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { UserInfoService } from '../../service/user-info.service';
 
 @Component({
   selector: 'app-user-header',
@@ -15,22 +16,26 @@ export class UserHeaderComponent {
   firstName ='';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private service: UserInfoService
   ) {}
 
   ngOnInit(): void {
-    const token = localStorage.getItem('access_token') !== null;
-    const options = {
-      headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + token,
-        'Content-Type': 'application/json'
-      })
-    };
-    this.http.get(`${this.apiUrl}/user`,options)
-    .subscribe((response: any) => {
-      this.firstName = response.data.first_name;
-      console.log(response.data.first_name);
-    });
+    // const token = localStorage.getItem('access_token') !== null;
+    // const options = {
+    //   headers: new HttpHeaders({
+    //     'Authorization': 'Bearer ' + token,
+    //     'Content-Type': 'application/json'
+    //   })
+    // };
+    // this.http.get(`${this.apiUrl}/user`,options)
+    // .subscribe((response: any) => {
+    //   this.firstName = response.data.first_name;
+    //   console.log(response.data.first_name);
+    // });
+    this.service.getUserInfo().subscribe((data)=>{
+      this.firstName = data.data.first_name;
+    })
   }
 
   SideNavToggle(){

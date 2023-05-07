@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="float-end">
-                    <button mat-raised-button (click)="openAddExtenForm()" class="float-right">
+                    <button mat-raised-button (click)="AddExtensionForm()" class="float-right">
                         ADD EXTENSION
                     </button>
                 </div>
@@ -29,62 +29,40 @@
                       <!-- Progress Column -->
                       <ng-container matColumnDef="programTitle">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Program Title</th>
-                        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                        <td mat-cell *matCellDef="let row"> {{row.programTitle}} </td>
                       </ng-container>
                       <ng-container matColumnDef="dateofPartnership">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date of Partnership </th>
-                        <td mat-cell *matCellDef="let row"> {{row.dateofPartnership | date}}</td>
+                        <td mat-cell *matCellDef="let row"> {{row.startDate | date}} - {{row.endDate | date}}</td>
                       </ng-container>
                 
                       <ng-container matColumnDef="place">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Place </th>
-                        <td mat-cell *matCellDef="let row"> {{row.firstName}}</td>
-                      </ng-container>
-                
-                      <ng-container matColumnDef="programDetails">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Program Details </th>
-                        <td mat-cell *matCellDef="let row"> {{row.lastName}}</td>
+                        <td mat-cell *matCellDef="let row"> {{row.place}}</td>
                       </ng-container>
                 
                       <ng-container matColumnDef="programLead">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Program Lead </th>
-                        <td mat-cell *matCellDef="let row"> {{row.address}}</td>
-                      </ng-container>
-                
-                      <ng-container matColumnDef="members">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Program Members </th>
-                        <td mat-cell *matCellDef="let row"> {{row.contactPerson}}</td>
-                      </ng-container>
-                
-                      <ng-container matColumnDef="entity">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> (Participants) Entity </th>
-                        <td mat-cell *matCellDef="let row"> {{row.contactPerson}}</td>
-                      </ng-container>
-                
-                      <ng-container matColumnDef="list-names">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> (Participants) List of Names </th>
-                        <td mat-cell *matCellDef="let row"> {{row.contactPerson}}</td>
+                        <td mat-cell *matCellDef="let row"> {{row.programLead}}</td>
                       </ng-container>
                 
                       <ng-container matColumnDef="programFlow">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Program Flow </th>
-                        <td mat-cell *matCellDef="let row"> {{row.contactPerson}}</td>
-                      </ng-container>
-                
-                      <ng-container matColumnDef="addDetails">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Additional Details </th>
-                        <td mat-cell *matCellDef="let row"> {{row.contactPerson}}</td>
+                        <td mat-cell *matCellDef="let row"> {{row.programFlow}}</td>
                       </ng-container>
                 
                       <ng-container matColumnDef="partner">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Partner </th>
-                        <td mat-cell *matCellDef="let row"> {{row.contactPerson}}</td>
+                        <td mat-cell *matCellDef="let row"> {{row.partners}}</td>
                       </ng-container>
                 
                       <ng-container matColumnDef="action">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                         <td mat-cell *matCellDef="let row">
-                          <button mat-icon-button color="warn" (click)="deleteFaculty(row.id)">
+                          <button mat-icon-button color="primary" (click)="viewExtension(row.id)">
+                            <mat-icon>edit</mat-icon>
+                          </button>
+                          <button mat-icon-button color="warn" (click)="archiveExtension(row.id)">
                             <mat-icon>delete</mat-icon>
                           </button>
                         </td>
