@@ -15,6 +15,9 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 })
 export class AdminAddPartnerComponent implements OnInit {
 partnerForm !: FormGroup;
+moaFile: any;
+submitted = false;
+
 constructor(
   private fb: FormBuilder,
   private datePipe: DatePipe,
@@ -37,51 +40,52 @@ ngOnInit(): void {
 }
   get f() {return this.partnerForm.controls};
 
-  
   onFileSelected(event: any) {
-    const allowedTypes = ['application/pdf', 'application/msword', 'image/png', 'image/jpeg'];
     const file = event.target.files[0];
+    const allowedTypes = ['application/pdf', 'application/msword', 'image/png', 'image/jpeg'];
     if (file && allowedTypes.includes(file.type)) {
-      const reader = new FileReader();
-      reader.readAsArrayBuffer(file);
-      reader.onload = () => {
-        if(reader.result){
-          const blob = new Blob([reader.result], { type: file.type });
-          const fileWithMeta = { file: blob, fileName: file.name };
-          this.partnerForm.patchValue({
-            moaFile: fileWithMeta
-          });
-        }
-      };
+      // The file is valid
+      this.moaFile = file;
+      this.toastr.success("Uploaded File is Accepted","Upload Success");
+      console.log(this.moaFile);
     } else {
+      // The file is invalid
+      event.target.value = ''; //reset uploaded file
       this.toastr.warning("Accepted: .docx, .png, jpg, .pdf","File Type Invalid");
-      // Show an error message to the user
     }
   }
 
   addPartner(){
-    const startDate = this.datePipe.transform(this.partnerForm.get('startDate')?.value, 'yyyy-MM-dd');
-    const endDate = this.datePipe.transform(this.partnerForm.get('endDate')?.value, 'yyyy-MM-dd');
+      this.submitted = true;
+      if(this.partnerForm.invalid){
+        return;
+      }
+      const startDate = this.datePipe.transform(this.partnerForm.get('startDate')?.value, 'yyyy-MM-dd');
+      const endDate = this.datePipe.transform(this.partnerForm.get('endDate')?.value, 'yyyy-MM-dd');
+  
+      const formData = new FormData();
+      formData.append('partnersName', this.partnerForm.get('partnersName')?.value);
+      formData.append('contactPerson', this.partnerForm.get('contactPerson')?.value);
+      formData.append('contactNo', this.partnerForm.get('contactNo')?.value);
+      formData.append('address', this.partnerForm.get('address')?.value);
 
-    const formData = new FormData();
-    formData.append('partnersName', this.partnerForm.get('partnersName')?.value);
-    formData.append('contactPerson', this.partnerForm.value.contactPerson);
-    formData.append('contactNo', this.partnerForm.value.contactNo);
-    formData.append('address', this.partnerForm.value.address);
-    formData.append('startDate', startDate || '');
-    formData.append('endDate', endDate || '');
-    // formData.append('moaFile', this.partnerForm.get('moa')?.value.file);
+      if(startDate){
+        formData.append('startDate', startDate);
+      }
+      if(endDate){
+        formData.append('endDate', endDate);
+      }
+      formData.append('moaFile', this.moaFile, this.moaFile.name);
 
-    console.log(formData);
-      // this.service.addPartner(formData).subscribe(
-      //   (response : any)=>{
-      //     this.toastr.success(response.message);
-      //     console.log(response);
-      //     this.dialogref.close();
-      //   },error=>{
-      //     this.toastr.warning(error.error.message);
-      //     console.log(error.error.message);
-      //   }
-      // )
+        this.service.addPartner(formData).subscribe(
+          (response : any)=>{
+            this.toastr.success(response.message);
+            console.log(response);
+            this.dialogref.close();
+          },error=>{
+            this.toastr.warning(error.error.message);
+            console.log(error.error.message);
+          }
+        )
     }
 }

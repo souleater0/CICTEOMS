@@ -91,27 +91,46 @@ class PartnersController extends Controller
     public function updatePartner(Request $request, $id){
         try{
             $partner = Partner::findOrFail($id);
-
-            $moaPath = $request->file('moa');
-            $moaPath->store('public/files');
-
-            $partner->partnersName = $request->input('partnersName');
-            $partner->contactPerson = $request->input('contactPerson');
-            $partner->contactNo = $request->input('contactNo');
-            $partner->address = $request->input('address');
-            $partner->startDate = $request->input('startDate');
-            $partner->endDate = $request->input('endDate');
-            $partner->moaPath = $logo->hashName();
-            
-            $partner->save();
-            $response['success'] = true;
-            $response['message'] = 'Partner has been updated!';
-        return response()->json($response);
-
+            if($request->hasFile('moaFile')){
+                //MoaFile Method
+                $completeMoaFileName = $request->file('moaFile')->getClientOriginalName();
+                $MoaFileNameOnly = pathinfo($completeMoaFileName, PATHINFO_FILENAME);
+                $moaFileExtension = $request->file('moaFile')->getClientOriginalExtension();
+                $moaUpload = str_replace(' ', '_', $MoaFileNameOnly).'-'.time().'.'.$moaFileExtension;
+                $path = $request->file('moaFile')->storeAs('public/files', $moaUpload);
+                
+                // Update MOA and other fields
+                $partner->partnersName = $request->input('partnersName');
+                $partner->contactPerson = $request->input('contactPerson');
+                $partner->contactNo = $request->input('contactNo');
+                $partner->address = $request->input('address');
+                $partner->startDate = $request->input('startDate');
+                $partner->endDate = $request->input('endDate');
+                $partner->moaPath = $path;
+                $partner->save();
+    
+                $response['success'] = true;
+                $response['message'] = 'Partner has been updated!';
+                return response()->json($response,200);
+            }            
+            else{
+                // Update non-MOA fields
+                $partner->partnersName = $request->input('partnersName');
+                $partner->contactPerson = $request->input('contactPerson');
+                $partner->contactNo = $request->input('contactNo');
+                $partner->address = $request->input('address');
+                $partner->startDate = $request->input('startDate');
+                $partner->endDate = $request->input('endDate');
+                $partner->save();
+    
+                $response['success'] = true;
+                $response['message'] = 'Partner has been updated!';
+                return response()->json($response,200);
+            }        
         } catch (Exception $e){
             $response['success'] = false;
             $response['message'] = 'Partners not found';
-        return response()->json($response);
+            return response()->json($response);
         }
     }
 

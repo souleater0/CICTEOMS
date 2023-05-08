@@ -43,7 +43,6 @@ class Partner extends Model
         'startDate',
         'endDate',
         'isArchive',
-        'isExpired',
         'moaPath',
     ];
     protected $table = 'partners';

@@ -4,7 +4,10 @@ import { DatePipe } from '@angular/common';
 
 //Service
 import { AdminViewPartnerServiceService } from '../../services/admin-view-partner-service.service';
+import { ToastrService } from '../../services/toastr.service';
 import { error } from 'jquery';
+import { FormBuilder, FormControl, FormGroup ,Validators} from '@angular/forms';
+
 
 declare var toastr: any;
 
@@ -15,30 +18,59 @@ declare var toastr: any;
 })
 export class AdminViewPartnerComponent implements OnInit {
   data: any;
-
-  partnersName: string = '';
-  contactPerson: string = '';
-  contactNo: string = '';
-  address: string = '';
-  startDate: string = '';
-  endDate: string = '';
+  submitted = false;
+  moaFile:any;
+  updatePartnerForm!: FormGroup;
 
   constructor(
     private service: AdminViewPartnerServiceService,
     private datePipe: DatePipe,
+    private fb: FormBuilder,
     private dialogRef: MatDialogRef<AdminViewPartnerComponent>,
+    private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) data: any)
   {
     this.data = data;
+
+    this.updatePartnerForm = this.fb.group({
+      partnersName : ['', Validators.required],
+      contactPerson: ['', Validators.required],
+      contactNo: ['', Validators.required],
+      address: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      moaFile: [null],
+    });
   }
   ngOnInit(): void {
+      this.updatePartnerForm = this.fb.group({
+        partnersName: [''],
+        contactPerson: [''],
+        contactNo: [''],
+        address: [''],
+        startDate: [''],
+        endDate: [''],
+        moaFile: [null]
+      });
+
+      this.updatePartnerForm.setValue({
+        partnersName: this.data.data.partnersName,
+        contactPerson: this.data.data.contactPerson,
+        contactNo: this.data.data.contactNo,
+        address: this.data.data.address,
+        startDate: this.data.data.startDate,
+        endDate: this.data.data.endDate,
+        moaFile: ''
+      });
+
       //non-empty-string
-      this.partnersName = this.data.data.partnersName;
-      this.contactPerson = this.data.data.contactPerson
-      this.contactNo = this.data.data.contactNo;
-      this.address = this.data.data.address;
-      this.startDate = this.data.data.startDate;
-      this.endDate = this.data.data.endDate;
+      // this.partnersName = this.data.data.partnersName;
+      // this.contactPerson = this.data.data.contactPerson
+      // this.contactNo = this.data.data.contactNo;
+      // this.address = this.data.data.address;
+      // this.startDate = this.data.data.startDate;
+      // this.endDate = this.data.data.endDate;
+
       //Toast
       toastr.options = {
         "closeButton": true,
@@ -57,36 +89,59 @@ export class AdminViewPartnerComponent implements OnInit {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
       };
-
-      // this.service.getPartner().subscribe((data:any)=>{
-      //   console.log(data);
-      // });
       
   }
 
-  updatePartner(id:number):void {
-    const startDate = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
-    const endDate = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
-    const data = {
-      partnersName: this.partnersName,
-      contactPerson: this.contactPerson,
-      contactNo: this.contactNo,
-      address: this.address,
-      startDate: startDate,
-      endDate: endDate
-    };
-    this.service.updatePartner(id, data).subscribe(
-      (response:any)=>{
-        console.log(response);
-       if(response.success==true){
-        // console.log(data);
-        toastr.success("Partner has been updated!", "Update Success");
-        this.dialogRef.close();
-       }
-    },error=>{
-      console.log(error);
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    const allowedTypes = ['application/pdf', 'application/msword', 'image/png', 'image/jpeg'];
+    if (file && allowedTypes.includes(file.type)) {
+      // The file is valid
+      this.moaFile = file;
+      this.toastr.success("Uploaded File is Accepted","Upload Success");
+      console.log(this.moaFile);
+    } else {
+      // The file is invalid
+      event.target.value = ''; //reset uploaded file
+      this.toastr.warning("Accepted: .docx, .png, jpg, .pdf","File Type Invalid");
     }
-    );
-    console.log(this.partnersName)
+  }
+  get f() {return this.updatePartnerForm.controls};
+
+  updatePartner(id:number):void {
+      this.submitted = true;
+      if(this.updatePartnerForm.invalid){
+        return;
+      }
+      const startDate = this.datePipe.transform(this.updatePartnerForm.get('startDate')?.value, 'yyyy-MM-dd');
+      const endDate = this.datePipe.transform(this.updatePartnerForm.get('endDate')?.value, 'yyyy-MM-dd');
+
+      const formData = new FormData();
+      formData.append('partnersName', this.updatePartnerForm.get('partnersName')?.value);
+      formData.append('contactPerson', this.updatePartnerForm.get('contactPerson')?.value);
+      formData.append('contactNo', this.updatePartnerForm.get('contactNo')?.value);
+      formData.append('address', this.updatePartnerForm.get('address')?.value);
+
+      if(startDate){
+        formData.append('startDate', startDate);
+      }
+      if(endDate){
+        formData.append('endDate', endDate);
+      }
+      
+      if(this.moaFile){
+        formData.append('moaFile', this.moaFile, this.moaFile.name);
+      }
+      this.service.updatePartner(id, formData).subscribe(
+        (response : any)=>{
+          this.toastr.success(response.message);
+          console.log(response);
+          this.dialogRef.close();
+        },error=>{
+          this.toastr.warning(error.error.message);
+          console.log(error.error.message);
+        }
+      )
+
   }
 }

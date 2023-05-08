@@ -30,19 +30,24 @@ export class AdminViewPartnerServiceService {
       return this.http.put(url, data);
     }
     //Update Partner
-    updatePartner(id:number, data: any){
+    updatePartner(id:number, data: any): Observable<any>{
+      const headers = new HttpHeaders();
       const url = `${this.apiUrl}/admin/update-partners/${id}`;
-      return this.http.put(url, data);
+      return this.http.post<any>(url,data, {
+        headers: headers
+      });
     }
 
+    downloadPartner(id:number, data:any){
+      const url = `${this.apiUrl}/admin/download-partners/${id}`;
+      return this.http.get(url);
+    }
     //Add Partner
     addPartner(data:any){
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'multipart/form-data'
-        })
-      };
+      const headers = new HttpHeaders();
       const url = `${this.apiUrl}/admin/add-partners/`;
-      return this.http.post<any>(url,data, httpOptions);
+      return this.http.post<any>(url,data, {
+        headers: headers
+      });
     }
 }

@@ -106,7 +106,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::put('admin/archive-partners/{id}',[PartnersController::class,'archivePartner']);
 
     //Admin Update Partner
-    Route::put('admin/update-partners/{id}',[PartnersController::class,'updatePartner']);
+    Route::post('admin/update-partners/{id}',[PartnersController::class,'updatePartner']);
 
 //Extension
     //Get Extension

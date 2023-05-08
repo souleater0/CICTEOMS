@@ -160,7 +160,9 @@ export class AdminPartnersmanagementComponent implements OnInit {
         },
         data:response,
       });
+      // console.log(response);
     });
+    
   }
   //delete
   archivePartner(id:number):void {
