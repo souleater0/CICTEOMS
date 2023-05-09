@@ -53,6 +53,7 @@ export class AdminLoginComponent {
       // console.log(response);
       if(response.success==true){
         localStorage.setItem('access_token', response.data.access_token);
+        localStorage.setItem('refresh_token', response.data.access_token);
         this.router.navigate(['/admin/dashboard']);
         toastr.success("Login Succesful!", "Welcome! Admin");
       }

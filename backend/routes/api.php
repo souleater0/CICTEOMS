@@ -108,6 +108,10 @@ Route::middleware('auth:admin')->group(function () {
     //Admin Update Partner
     Route::post('admin/update-partners/{id}',[PartnersController::class,'updatePartner']);
 
+    //Download /Print Moa
+
+    Route::get('admin/partners/download-moa/{id}',[PartnersController::class,'downloadMoa']);
+
 //Extension
     //Get Extension
     Route::get('admin/extensions', function () {

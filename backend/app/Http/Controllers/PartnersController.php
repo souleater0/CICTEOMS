@@ -28,7 +28,9 @@ class PartnersController extends Controller
                 $moaUpload = str_replace(' ', '_', $MoaFileNameOnly).'-'.time().'.'.$moaFileExtension;
                 $path = $request->file('moaFile')->storeAs('public/files', $moaUpload);
 
-                // dd($moaUpload);
+                //corrected Path
+                $correctPath=str_replace('public/','',$path);
+                // dd($correctPath);
                 $partner = Partner::create([
                     'partnersName' => $request->input('partnersName'),
                     'contactPerson' => $request->input('contactPerson'),
@@ -37,13 +39,13 @@ class PartnersController extends Controller
                     'startDate' => $request->input('startDate'),
                     'endDate' => $request->input('endDate'),
                     'isArchive' => $isArchive,
-                    'moaPath' => $path
+                    'moaPath' => $correctPath
                 ]);
                 $response['success'] = true;
                 $response['file'] = 'File Uploaded';
                 $response['message'] = 'Partners Created Successfully';
                 return response()->json($response, 200);
-                // $partner->moaPath = $moaUpload; //save file in database
+                $partner->moaPath = $moaUpload; //save file in database
                 
             }
             else{
@@ -134,4 +136,62 @@ class PartnersController extends Controller
         }
     }
 
+    public function downloadMoa($id){
+
+        $partner = Partner::find($id);
+
+        if(!$partner){
+            abort(404);
+        }
+    
+        //Get File Path in database
+        $filePath = $partner->moaPath;
+        
+        // Get file extension
+        $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+    
+        // Set the content type based on the file extension
+        $contentType = '';
+        switch ($extension) {
+            case 'pdf':
+                $contentType = 'application/pdf';
+                break;
+            case 'docx':
+                $contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+                break;
+            case 'png':
+                $contentType = 'image/png';
+                break;
+            case 'jpeg':
+            case 'jpg':
+                $contentType = 'image/jpeg';
+                break;
+            default:
+                $contentType = 'application/octet-stream';
+                break;
+        }
+    
+        // Set headers
+        $headers = [
+            'Content-Type' => $contentType,
+        ];
+    
+        // Return the file download
+        $file = public_path('storage/' . $filePath);
+
+        //getfilename
+        $filename = str_replace('files/','',$filePath);
+
+        // dd($file);
+        // return response()->download($file,$filename,$headers);
+
+        $fileContents = file_get_contents($file);
+        $fileBase64 = base64_encode($fileContents);
+        return response()->json([
+            'file' => $fileBase64,
+            'fileName' => $filename,
+            'fileExt' => $extension,
+            'fileType' => $contentType
+        ]);
+    }
 }

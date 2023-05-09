@@ -1,0 +1,23 @@
+<!-- Modal -->
+<div class="mat-dialog-container">
+    <div class="modal-header">
+        <h2 mat-dialog-title>MOA Print/Download </h2>
+    </div>
+    <mat-dialog-content class="mat-typography text-dark">
+        <div class="row">
+            <div class="col-12">
+                <button mat-raised-button color="warn" style="width: 100%;" (click)="downloadMoa(data.data.id)">DOWNLOAD MOA</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mt-2">
+                <button mat-raised-button color="warn" style="width: 100%;" (click)="printMoa(data.data.id)">PRINT MOA</button>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close class="fw-bold border bg-danger text-white">CLOSE</button>
+    </mat-dialog-actions>
+</div>
+
+<!-- END -->

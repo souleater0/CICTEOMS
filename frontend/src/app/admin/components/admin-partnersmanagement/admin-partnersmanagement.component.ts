@@ -9,6 +9,7 @@ import { AdminViewPartnerServiceService } from '../../services/admin-view-partne
 import { MatDialog } from '@angular/material/dialog';
 import { AdminViewPartnerComponent } from '../../dialogs/admin-view-partner/admin-view-partner.component';
 import { AdminAddPartnerComponent } from '../../dialogs/admin-add-partner/admin-add-partner.component';
+import { AdminDownloadMoaComponent } from '../../dialogs/admin-download-moa/admin-download-moa.component';
 
 declare var toastr: any;
 
@@ -185,6 +186,22 @@ export class AdminPartnersmanagementComponent implements OnInit {
         bottom: 'auto',
         
       }
+    });
+  }
+  downloadMoa(id:number):void{
+    // console.log("Moa download");
+    this.service.viewParter(id).subscribe(response=>{
+      const dialogRef = this.dialog.open(AdminDownloadMoaComponent,{
+        width: '40%',
+        position: {
+          top: '0',
+          left: '30%',
+          right: '30%',
+          bottom: 'auto',
+        },
+        data:response,
+      });
+      // console.log(response);
     });
   }
 }

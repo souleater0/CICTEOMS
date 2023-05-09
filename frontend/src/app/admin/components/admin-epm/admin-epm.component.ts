@@ -25,7 +25,8 @@ export class AdminEpmComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'programTitle',
-    'dateofPartnership',
+    'startDate',
+    'endDate',
     'place',
     'programLead',
     'programFlow',

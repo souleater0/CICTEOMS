@@ -54,6 +54,7 @@ import { AdminViewPartnerComponent } from './dialogs/admin-view-partner/admin-vi
 import { AdminAddPartnerComponent } from './dialogs/admin-add-partner/admin-add-partner.component';
 import { AdminAddExtensionComponent } from './dialogs/admin-add-extension/admin-add-extension.component';
 import { AdminViewExtensionComponent } from './dialogs/admin-view-extension/admin-view-extension.component';
+import { AdminDownloadMoaComponent } from './dialogs/admin-download-moa/admin-download-moa.component';
 
 
 const routes:Routes = [
@@ -140,6 +141,7 @@ const routes:Routes = [
     AdminAddPartnerComponent,
     AdminAddExtensionComponent,
     AdminViewExtensionComponent,
+    AdminDownloadMoaComponent,
   ],
   imports: [
     BrowserModule,

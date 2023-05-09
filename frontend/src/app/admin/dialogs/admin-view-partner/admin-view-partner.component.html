@@ -2,56 +2,6 @@
     <div class="modal-header">
         <h2 mat-dialog-title>Edit Partner's Information</h2>
     </div>
-    <!-- <mat-dialog-content class="mat-typography text-dark">
-        <div class="row">
-            <mat-dialog-content class="mat-typography text-dark">
-                <div class="row">
-                    <div class="col-6">
-                        <mat-form-field appearance="outline" style="width:100%;">
-                            <mat-label>Partner Name</mat-label>
-                            <input matInput type="text" value="{{data.data.partnersName}}" [(ngModel)]="partnersName">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-12">
-                        <mat-form-field appearance="outline" style="width:100%;">
-                            <mat-label>Contact Person</mat-label>
-                            <input matInput type="text" value="{{ data.data.contactPerson }}" [(ngModel)]="contactPerson">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-12">
-                        <mat-form-field appearance="outline" style="width:100%;">
-                            <mat-label>Contact Number</mat-label>
-                            <input matInput type="text" value="{{ data.data.contactNo }}" [(ngModel)]="contactNo">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-12">
-                        <mat-form-field appearance="outline" style="width:100%;">
-                            <mat-label>Address</mat-label>
-                            <input matInput type="address"  value="{{ data.data.address }}" [(ngModel)]="address">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-12">
-                        <mat-form-field appearance="outline" style="width:100%;">
-                            <mat-label>Date of Partnership</mat-label>
-                            <mat-date-range-input [rangePicker]="picker">
-                                <input matStartDate value="{{ data.data.startDate}}" [(ngModel)]="startDate">
-                                <input matEndDate value="{{ data.data.endDate }}" [(ngModel)]="endDate">
-                            </mat-date-range-input>
-                            <mat-hint>YYYY/DD/MM – YYYY/DD/MM</mat-hint>
-                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-date-range-picker #picker></mat-date-range-picker>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-6 mt-2 ms-1">
-                        <b>Moa:</b>
-                        <div class="row">
-                            <input type="file" name="file" class="FileUpload" (change)="onFileSelected($event)" value="{{ data.data.moaFile }}" [(ngModel)]="moaFile">
-                        </div>
-                    </div>
-                </div>
-            </mat-dialog-content>
-        </div>
-    </mat-dialog-content> -->
     <form [formGroup]="updatePartnerForm" (ngSubmit)="updatePartner(data.data.id)">
         <mat-dialog-content class="mat-typography text-dark">
             <div class="row">
@@ -121,8 +71,4 @@
             <button mat-button class="fw-bold border bg-primary text-white" type="submit">Update</button>
         </mat-dialog-actions>
     </form>
-    <!-- <mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close class="fw-bold border bg-danger text-white">CLOSE</button>
-        <button mat-button class="fw-bold border bg-primary text-white" (click)="updatePartner(data.data.id)">Update</button>
-    </mat-dialog-actions> -->
 </div>
